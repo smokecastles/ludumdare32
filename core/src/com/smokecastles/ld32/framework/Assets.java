@@ -13,6 +13,6 @@ public class Assets {
     public static void load() {
         TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("textures.atlas"));
 
-        playerNormal   = new TextureRegion(atlas.findRegion("chars/player_normal"));
+        playerNormal   = new TextureRegion(atlas.findRegion("char2_blue"));
     }
 }
