@@ -17,6 +17,16 @@ public class World {
     public TmxMapLoader tmxLoader;
     public static final int TILED_TILE_WIDTH_PIXELS = 70;
 
+    public final Player player;
+
+    public World() {
+        player = new Player(3, 3);
+    }
     public void update(float deltaTime) {
+        updatePlayer(deltaTime);
+    }
+
+    public void updatePlayer(float deltaTime) {
+        player.update(deltaTime);
     }
 }

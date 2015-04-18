@@ -70,7 +70,6 @@ public class GameScreen implements Screen {
                 updateRunning(deltaTime);
                 break;
             case GAME_PAUSED:
-                // TODO RENDERIZAR MENU PAUSA
                 break;
             case GAME_LEVEL_END:
                 break;

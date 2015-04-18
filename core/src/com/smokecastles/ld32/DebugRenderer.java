@@ -56,10 +56,10 @@ public class DebugRenderer {
             shapeRenderer.setColor(Color.RED);
 
             for (int i = 0; i < World.WORLD_WIDTH; i++)
-                shapeRenderer.line(i/2f, 0, i/2f, World.WORLD_HEIGHT);
+                shapeRenderer.line(i, 0, i, World.WORLD_HEIGHT);
 
             for (int i = 0; i < World.WORLD_HEIGHT; i++)
-                shapeRenderer.line(0, i/2f, World.WORLD_WIDTH, i/2f);
+                shapeRenderer.line(0, i, World.WORLD_WIDTH, i);
 
             shapeRenderer.end();
         }

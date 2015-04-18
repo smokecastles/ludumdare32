@@ -38,7 +38,10 @@ public class WorldRenderer {
     }
 
     public void render() {
+        cam.update();
+        batch.setProjectionMatrix(cam.combined);
 
+        debugRenderer.render();
     }
 
     public void resize(int width, int height){
