@@ -45,14 +45,24 @@ public abstract class WorldPhysics {
         getTiles(startX, startY, endX, endY, world, tiles, "solid_tiles");
 
         for (Rectangle tile : tiles) {
+
             // First check the intersection to find out if we need to resolve the collision
             // on the X axis or delegate it to the Y axis.
             // If the width is greater than the height, usually (for high movement speed may fail)
             // we need to correct the entity position from the vertical collision results.
             // http://www.raywenderlich.com/15230/how-to-make-a-platform-game-like-super-mario-brothers-part-1
             // http://gamedev.stackexchange.com/questions/17502/how-to-deal-with-corner-collisions-in-2d?rq=1
-            Intersector.intersectRectangles(entity.bounds, tile, intersection);
+
+            // Check if we're still intersecting, it's possible that we're no longer colliding from the
+            // resolution to the previous iteration
+            if (!Intersector.intersectRectangles(entity.bounds, tile, intersection)) continue;
+
             if (intersection.width > intersection.height) {
+                continue;
+            } else if (intersection.height - intersection.width < 0.01f) {
+                // TODO?: fix so that this HACK is not needed
+                // For "corner against corner" collisions it's possible that the previous width > height
+                // check is not accurate. See once again previous stackexchange link.
                 continue;
             }
 
@@ -71,7 +81,7 @@ public abstract class WorldPhysics {
 
         // if the entity is moving upwards, check the tiles to the top of it's
         // top bounding box edge, otherwise check the ones to the bottom
-        if (entity.velocity.y > 0) {
+        if (entity.velocity.y >= 0) {
             startY = endY = (int) (entity.bounds.y + Player.HEIGHT);
         } else {
             startY = endY = (int) entity.bounds.y;
@@ -90,7 +100,7 @@ public abstract class WorldPhysics {
         for (Rectangle tile : tiles) {
             if (firstTileX == -1) firstTileX = (int) tile.x;
 
-            if (!entity.grounded) {
+            if (true) {
                 // Now we check for overlap, needed in case the collision detection in X axis
                 // has moved the entity bounds
                 if (tile.overlaps(entity.bounds)) {

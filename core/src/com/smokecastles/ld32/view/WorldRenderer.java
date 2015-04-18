@@ -38,7 +38,7 @@ public class WorldRenderer {
 
         viewport.apply();
 
-        this.cam.position.set(FRUSTUM_WIDTH / 2, FRUSTUM_HEIGHT / 2, 0);
+        this.cam.position.set(World.WORLD_WIDTH / 2, World.WORLD_HEIGHT / 2, 0);
 
         tiledRenderer = new OrthogonalTiledMapRenderer(world.tiledMap, 1f / world.TILED_TILE_WIDTH_PIXELS, batch);
 
@@ -50,6 +50,8 @@ public class WorldRenderer {
         cam.update();
         batch.setProjectionMatrix(cam.combined);
         shapeRenderer.setProjectionMatrix(cam.combined);
+
+        renderTiledMap();
 
         renderEntities();
 
@@ -67,7 +69,7 @@ public class WorldRenderer {
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(1, 0, 0, 0.3f);
-        shapeRenderer.circle(world.player.weaponArea.x, world.player.weaponArea.y, world.player.weaponArea.radius, 50);
+        shapeRenderer.circle(world.player.weaponArea.x, world.player.weaponArea.y, world.player.weaponArea.radius, 30);
         shapeRenderer.end();
         Gdx.gl.glDisable(GL20.GL_BLEND);
     }
@@ -79,6 +81,12 @@ public class WorldRenderer {
         float renderWidth = renderHeight * keyFrame.getRegionWidth() / keyFrame.getRegionHeight();
 
         batch.draw(keyFrame, world.player.position.x + renderWidth / 2, world.player.position.y - renderHeight / 2, -renderWidth, renderHeight);
+    }
+
+    private void renderTiledMap() {
+        batch.enableBlending();
+        tiledRenderer.setView(cam);
+        tiledRenderer.render();
     }
 
     public void resize(int width, int height){
