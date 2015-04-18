@@ -34,13 +34,13 @@ public abstract class WorldPhysics {
         // if the entity is moving right, check the tiles to the right of it's
         // right bounding box edge, otherwise check the ones to the left
         if (entity.velocity.x > 0) {
-            startX = endX = (int) (entity.bounds.x + Player.WIDTH);
+            startX = endX = (int) (entity.bounds.x + entity.bounds.width);
         } else {
             startX = endX = (int) entity.bounds.x;
         }
 
         startY = (int) entity.bounds.y;
-        endY = (int) (entity.bounds.y + Player.HEIGHT);
+        endY = (int) (entity.bounds.y + entity.bounds.height);
 
         getTiles(startX, startY, endX, endY, world, tiles, "solid_tiles");
 
@@ -67,7 +67,7 @@ public abstract class WorldPhysics {
             }
 
             if (entity.velocity.x > 0) {
-                entity.bounds.x = tile.x - Player.WIDTH;
+                entity.bounds.x = tile.x - entity.bounds.width;
                 entity.position.x = entity.bounds.x + entity.bounds.width / 2;
             } else {
                 entity.bounds.x = tile.x + World.TILE_DIMENS;
@@ -82,13 +82,13 @@ public abstract class WorldPhysics {
         // if the entity is moving upwards, check the tiles to the top of it's
         // top bounding box edge, otherwise check the ones to the bottom
         if (entity.velocity.y >= 0) {
-            startY = endY = (int) (entity.bounds.y + Player.HEIGHT);
+            startY = endY = (int) (entity.bounds.y + entity.bounds.height);
         } else {
             startY = endY = (int) entity.bounds.y;
         }
 
         startX = (int) entity.bounds.x;
-        endX = (int) (entity.bounds.x + Player.WIDTH);
+        endX = (int) (entity.bounds.x + entity.bounds.width);
 
         getTiles(startX, startY, endX, endY, world, tiles, "solid_tiles");
 
@@ -100,7 +100,7 @@ public abstract class WorldPhysics {
         for (Rectangle tile : tiles) {
             if (firstTileX == -1) firstTileX = (int) tile.x;
 
-            if (true) {
+            if (!entity.grounded) {
                 // Now we check for overlap, needed in case the collision detection in X axis
                 // has moved the entity bounds
                 if (tile.overlaps(entity.bounds)) {
@@ -108,7 +108,7 @@ public abstract class WorldPhysics {
                     // so it is just below/above the tile we collided with
                     // this removes bouncing :)
                     if (entity.velocity.y > 0) {
-                        entity.bounds.y = tile.y - Player.HEIGHT;
+                        entity.bounds.y = tile.y - entity.bounds.height;
                         entity.position.y = entity.bounds.y + entity.bounds.height / 2;
                     } else {
                         entity.bounds.y = tile.y + World.TILE_DIMENS;

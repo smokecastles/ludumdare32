@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.smokecastles.ld32.entities.Enemy;
 import com.smokecastles.ld32.utils.Constants;
 import com.smokecastles.ld32.entities.Player;
 import com.smokecastles.ld32.World;
@@ -62,6 +63,7 @@ public class WorldRenderer {
         batch.enableBlending();
         batch.begin();
         renderPlayer();
+        renderEnemies();
         batch.end();
 
         // Render weapon circle!
@@ -81,6 +83,19 @@ public class WorldRenderer {
         float renderWidth = renderHeight * keyFrame.getRegionWidth() / keyFrame.getRegionHeight();
 
         batch.draw(keyFrame, world.player.position.x + renderWidth / 2, world.player.position.y - renderHeight / 2, -renderWidth, renderHeight);
+    }
+
+    private void renderEnemies() {
+        for (Enemy enemy : world.enemies) {
+            if (!enemy.isAlive) continue;
+
+            TextureRegion keyFrame = enemy.getKeyFrame();
+
+            float renderHeight = Enemy.HEIGHT;
+            float renderWidth = Enemy.WIDTH;
+
+            batch.draw(keyFrame, enemy.position.x + renderWidth / 2, enemy.position.y - renderHeight / 2, -renderWidth, renderHeight);
+        }
     }
 
     private void renderTiledMap() {

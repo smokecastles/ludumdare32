@@ -3,6 +3,8 @@ package com.smokecastles.ld32;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.utils.Array;
+import com.smokecastles.ld32.entities.Enemy;
 import com.smokecastles.ld32.entities.Player;
 
 /**
@@ -20,9 +22,14 @@ public class World {
     public static final int TILED_TILE_WIDTH_PIXELS = 30;
 
     public final Player player;
+    // Entities
+    public Array<Enemy> enemies = new Array<Enemy>();
 
     public World() {
         player = new Player(3, 3);
+
+        Enemy enemy = new Enemy(6,6);
+        enemies.add(enemy);
 
         initTiled();
     }
@@ -37,6 +44,7 @@ public class World {
 
     public void update(float deltaTime) {
         updatePlayer(deltaTime);
+        updateEnemies(deltaTime);
 
         checkCollisions();
     }
@@ -45,11 +53,17 @@ public class World {
         player.update(deltaTime);
     }
 
+    private void updateEnemies(float deltaTime) {
+        for (Enemy enemy : enemies) {
+            if (enemy.isAlive) enemy.update(deltaTime);
+        }
+    }
+
     private void checkCollisions() {
         player.updatePhysics(this);
 
-//        for (Enemy enemy : enemies) {
-//            if (enemy.isAlive) enemy.updatePhysics(this);
-//        }
+        for (Enemy enemy : enemies) {
+            if (enemy.isAlive) enemy.updatePhysics(this);
+        }
     }
 }

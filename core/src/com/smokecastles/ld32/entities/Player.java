@@ -18,8 +18,8 @@ public class Player extends DynamicGameEntity {
 
     public static final float MAX_WEAPON_RADIUS = WIDTH * 3;
 
-    public PlayerState.NormalState normalState = new PlayerState.NormalState();
-    public PlayerState.AttackingState attackingState = new PlayerState.AttackingState();
+    PlayerState.NormalState normalState = new PlayerState.NormalState();
+    PlayerState.AttackingState attackingState = new PlayerState.AttackingState();
 
     PlayerController controller;
 
