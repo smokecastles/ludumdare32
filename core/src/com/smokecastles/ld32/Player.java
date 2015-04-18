@@ -1,6 +1,7 @@
 package com.smokecastles.ld32;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Circle;
 import com.smokecastles.ld32.framework.Assets;
 import com.smokecastles.ld32.framework.DynamicGameEntity;
 
@@ -14,6 +15,8 @@ public class Player extends DynamicGameEntity {
     public static final float WALK_ACCEL = 10f;
     public static final float WALK_DAMPING = 0.89f;
 
+    public static final float MAX_WEAPON_RADIUS = WIDTH * 3;
+
     public PlayerState.NormalState normalState = new PlayerState.NormalState();
     public PlayerState.AttackingState attackingState = new PlayerState.AttackingState();
 
@@ -21,11 +24,15 @@ public class Player extends DynamicGameEntity {
 
     PlayerState state; // current state
 
+    Circle weaponArea = new Circle();
+
     public Player(float x, float y) {
         super(x, y, WIDTH, HEIGHT, new PlayerPhysics());
 
         controller = new PlayerController();
+
         state = normalState;
+        state.enterState(this);
     }
 
     public void moveLeft() {
@@ -59,6 +66,9 @@ public class Player extends DynamicGameEntity {
         position.add(velocity.x * deltaTime, velocity.y * deltaTime);
         bounds.x = position.x - bounds.width / 2;
         bounds.y = position.y - bounds.height / 2;
+
+        weaponArea.x = position.x;
+        weaponArea.y = position.y;
 
         state.update(this, deltaTime);
     }

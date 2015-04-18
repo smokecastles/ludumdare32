@@ -24,9 +24,12 @@ public interface PlayerState {
     }
 
     class NormalState extends BaseState {
+        float stateTime;
 
         @Override
-        public void enterState(Player player) {}
+        public void enterState(Player player) {
+            stateTime = 0;
+        }
 
         @Override
         public void moveLeft(Player player) {
@@ -72,6 +75,12 @@ public interface PlayerState {
 
         @Override
         public void update(Player player, float deltaTime) {
+            if (player.weaponArea.radius > 0.1f) {
+                player.weaponArea.radius -= 0.7 * stateTime;
+            } else {
+                player.weaponArea.radius = 0;
+            }
+
             // Apply damping to the velocity on the x-axis so we don't
             // walk infinitely once a key was pressed
             player.velocity.x *= Player.WALK_DAMPING;
@@ -84,6 +93,8 @@ public interface PlayerState {
             if (Math.abs(player.velocity.y) < 1) {
                 player.velocity.y = 0;
             }
+
+            stateTime += deltaTime;
         }
 
         @Override
@@ -96,7 +107,9 @@ public interface PlayerState {
         float stateTime;
 
         @Override
-        public void enterState(Player player) {}
+        public void enterState(Player player) {
+            stateTime = 0;
+        }
 
         @Override
         public void moveLeft(Player player) {
@@ -125,6 +138,10 @@ public interface PlayerState {
 
         @Override
         public void update(Player player, float deltaTime) {
+            if (player.weaponArea.radius < Player.MAX_WEAPON_RADIUS) {
+                player.weaponArea.radius += 0.1 * stateTime;
+            }
+
             player.velocity.x *= Player.WALK_DAMPING;
             player.velocity.y *= Player.WALK_DAMPING;
 
@@ -135,6 +152,8 @@ public interface PlayerState {
             if (Math.abs(player.velocity.y) < 1) {
                 player.velocity.y = 0;
             }
+
+            stateTime += deltaTime;
         }
 
         @Override
