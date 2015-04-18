@@ -1,14 +1,27 @@
 package com.smokecastles.ld32.controller;
 
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.smokecastles.ld32.World;
 import com.smokecastles.ld32.entities.Enemy;
+import com.smokecastles.ld32.entities.Player;
 
 /**
  * Created by juanma on 18/04/15.
  */
 public class EnemyController {
+    World world;
+
+    enum MovementMode {
+        TOTALLY_RANDOM, FOLLOW_PLAYER, ESCAPE_FROM_PLAYER
+    }
+
+    MovementMode movementMode = MovementMode.FOLLOW_PLAYER;
+
     private static final float TIMER_VALUE_CHECK_POSITION = 0.5f;
+
+    private boolean followPlayer = false;
 
     float timer = -1f;
     float timerCheckPosition = TIMER_VALUE_CHECK_POSITION;
@@ -19,6 +32,16 @@ public class EnemyController {
     Vector2 previousPosition = new Vector2(0, 0);
 
     public void update(Enemy enemy, float deltaTime) {
+        if (enemy.playerInRange) {
+            switch (movementMode) {
+                case FOLLOW_PLAYER:
+                case ESCAPE_FROM_PLAYER:
+                    return;
+                default:
+                    break;
+            }
+        }
+
         if (timer < 0) {
             dirX = MathUtils.random(-1, 1);
             dirY = MathUtils.random(-1, 1);

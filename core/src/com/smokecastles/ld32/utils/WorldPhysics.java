@@ -1,8 +1,10 @@
 package com.smokecastles.ld32.utils;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import com.smokecastles.ld32.entities.Player;
@@ -156,5 +158,36 @@ public abstract class WorldPhysics {
                 }
             }
         }
+    }
+
+    static Vector2 circleCenter = new Vector2();
+    static Vector2 startBoundsVector = new Vector2();
+    static Vector2 endBoundsVector = new Vector2();
+
+    public static boolean checkCircleAndRectangleOverlap(Circle circle, Rectangle bounds) {
+        circleCenter.set(circle.x, circle.y);
+
+        if (circle.x > bounds.x && circle.x < bounds.x + bounds.width
+                && circle.y > bounds.y && circle.y < bounds.y + bounds.width) {
+            return true;
+        }
+
+        startBoundsVector.set(bounds.x, bounds.y);
+        endBoundsVector.set(bounds.x + bounds.width, bounds.y);
+        if (Intersector.intersectSegmentCircle(startBoundsVector, endBoundsVector, circleCenter, circle.radius * circle.radius)) return true;
+
+        startBoundsVector.set(bounds.x + bounds.width, bounds.y);
+        endBoundsVector.set(bounds.x + bounds.width, bounds.y + bounds.height);
+        if (Intersector.intersectSegmentCircle(startBoundsVector, endBoundsVector, circleCenter, circle.radius * circle.radius)) return true;
+
+        startBoundsVector.set(bounds.x + bounds.width, bounds.y + bounds.height);
+        endBoundsVector.set(bounds.x, bounds.y + bounds.height);
+        if (Intersector.intersectSegmentCircle(startBoundsVector, endBoundsVector, circleCenter, circle.radius * circle.radius)) return true;
+
+        startBoundsVector.set(bounds.x, bounds.y + bounds.height);
+        endBoundsVector.set(bounds.x, bounds.y);
+        if (Intersector.intersectSegmentCircle(startBoundsVector, endBoundsVector, circleCenter, circle.radius * circle.radius)) return true;
+
+        return false;
     }
 }

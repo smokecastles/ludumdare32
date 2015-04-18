@@ -6,6 +6,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.utils.Array;
 import com.smokecastles.ld32.entities.Enemy;
 import com.smokecastles.ld32.entities.Player;
+import com.smokecastles.ld32.utils.WorldPhysics;
 
 public class World {
     public static final float WORLD_WIDTH = 43;
@@ -52,7 +53,9 @@ public class World {
 
     private void updateEnemies(float deltaTime) {
         for (Enemy enemy : enemies) {
-            if (enemy.isAlive) enemy.update(deltaTime);
+            if (enemy.isAlive) {
+                enemy.update(deltaTime);
+            }
         }
     }
 
@@ -60,7 +63,14 @@ public class World {
         player.updatePhysics(this);
 
         for (Enemy enemy : enemies) {
-            if (enemy.isAlive) enemy.updatePhysics(this);
+            if (enemy.isAlive) {
+                if (WorldPhysics.checkCircleAndRectangleOverlap(enemy.detectionArea, player.bounds)) {
+                    enemy.startFollowingPlayer(player.position);
+                } else if (enemy.playerInRange) {
+                    enemy.stopFollowingPlayer();
+                }
+                enemy.updatePhysics(this);
+            }
         }
     }
 }

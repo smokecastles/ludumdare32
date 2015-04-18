@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.smokecastles.ld32.World;
+import com.smokecastles.ld32.entities.Enemy;
 
 public class DebugRenderer {
     OrthographicCamera cam;
@@ -38,7 +39,7 @@ public class DebugRenderer {
         shapeRenderer.setProjectionMatrix(cam.combined);
 
         drawDebugGrid();
-        drawDebugRectangles();
+        drawDebugShapes();
         drawDebugTexts();
     }
 
@@ -62,13 +63,21 @@ public class DebugRenderer {
         }
     }
 
-    private void drawDebugRectangles() {
+    private void drawDebugShapes() {
         if (drawRectangles) {
             shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
             shapeRenderer.setColor(Color.YELLOW);
 
 //            shapeRenderer.rect(world.dude.bounds.x, world.dude.bounds.y,
 //                    world.dude.bounds.width, world.dude.bounds.height);
+
+
+
+            for (Enemy enemy : world.enemies) {
+                shapeRenderer.setColor(1, 0, 0, 0.3f);
+                shapeRenderer.circle(enemy.detectionArea.x, enemy.detectionArea.y, enemy.detectionArea.radius, 30);
+            }
+
 
             shapeRenderer.end();
         }
