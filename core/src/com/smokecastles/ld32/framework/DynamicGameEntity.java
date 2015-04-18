@@ -9,6 +9,10 @@ import com.smokecastles.ld32.World;
  * Created by juanma on 18/04/15.
  */
 public abstract class DynamicGameEntity {
+    public enum Orientation {
+        LEFT, RIGHT, UP, DOWN
+    }
+    
     PhysicsComponent physics;
 
     public final Vector2 position;
@@ -17,7 +21,7 @@ public abstract class DynamicGameEntity {
     public final Vector2 velocity;
     public final Vector2 accel;
 
-    int orientation;
+    public Orientation orientation;
     boolean grounded = false;
     boolean atEdge = false;
 

@@ -12,5 +12,8 @@ public abstract class Constants {
     public static int WINDOW_WIDTH = NATIVE_WIDTH;
     public static int WINDOW_HEIGHT = NATIVE_HEIGHT;
 
+    public static float BGCOLOR_R = 0.204f;
+    public static float BGCOLOR_G = 0.204f;
+    public static float BGCOLOR_B = 0.467f;
 
 }

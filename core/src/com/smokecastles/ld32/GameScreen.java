@@ -84,7 +84,7 @@ public class GameScreen implements Screen {
 
     public void draw() {
         GL20 gl = Gdx.gl;
-        gl.glClearColor(0.204f, 0.204f, 0.467f, 1);
+        gl.glClearColor(Constants.BGCOLOR_R, Constants.BGCOLOR_G, Constants.BGCOLOR_B, 1);
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         worldRenderer.render();

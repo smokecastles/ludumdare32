@@ -24,28 +24,35 @@ public class PlayerInputHandler {
 
     private static Command moveLeftCommand  = new Command() {
         @Override
-        public void execute(Player dude) {
-            /*dude.moveLeft();*/
+        public void execute(Player player) {
+            player.moveLeft();
         }
     };
 
     private static Command moveRightCommand = new Command() {
         @Override
-        public void execute(Player dude) {
-            /*dude.moveRight();*/
+        public void execute(Player player) {
+            player.moveRight();
         }
     };
 
-    private static Command jumpCommand      = new Command() {
+    private static Command moveUpCommand = new Command() {
         @Override
         public void execute(Player player) {
-            //dude.jump();
+            player.moveUp();
+        }
+    };
+
+    private static Command moveDownCommand = new Command() {
+        @Override
+        public void execute(Player player) {
+            player.moveDown();
         }
     };
 
     private static Command resetPosition    = new Command() {
         @Override
-        public void execute(Player dude) {
+        public void execute(Player player) {
             //dude.position.x = 2;
             //dude.position.y = 12;
         }
@@ -63,8 +70,8 @@ public class PlayerInputHandler {
 
         Command keyLeft     = moveLeftCommand;
         Command keyRight    = moveRightCommand;
-        Command keyUp       = jumpCommand;
-        Command keySpace    = jumpCommand;
+        Command keyUp       = moveUpCommand;
+        Command keyDown     = moveDownCommand;
 
         // TODO: distinguish platform
         Application.ApplicationType appType = Gdx.app.getType();
@@ -81,8 +88,8 @@ public class PlayerInputHandler {
             commands.add(keyUp);
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.SPACE) ) {
-            commands.add(keySpace);
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN) ) {
+            commands.add(keyDown);
         }
 
         // XBOX 360 PAD
@@ -95,9 +102,17 @@ public class PlayerInputHandler {
                 commands.add(keyLeft);
             }
 
-            if (controller.getButton(Xbox360Pad.BUTTON_A)) {
-                commands.add(keySpace);
+            if (controller.getAxis(Xbox360Pad.AXIS_LEFT_X) < -0.2f) {
+                commands.add(keyUp);
             }
+
+            if (controller.getAxis(Xbox360Pad.AXIS_LEFT_X) > -0.2f) {
+                commands.add(keyDown);
+            }
+
+//            if (controller.getButton(Xbox360Pad.BUTTON_A)) {
+//                commands.add(keySpace);
+//            }
 
             if (controller.getButton(Xbox360Pad.BUTTON_BACK)) {
                 commands.add(resetPosition);
