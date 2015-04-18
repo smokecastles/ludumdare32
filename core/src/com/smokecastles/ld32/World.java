@@ -28,6 +28,8 @@ public class World {
 
         Enemy enemy = new Enemy(6,6);
         enemies.add(enemy);
+        Enemy enemy2 = new Enemy(12,12);
+        enemies.add(enemy2);
 
         initTiled();
     }

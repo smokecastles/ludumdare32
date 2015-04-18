@@ -21,8 +21,6 @@ public class EnemyController {
 
     private static final float TIMER_VALUE_CHECK_POSITION = 0.5f;
 
-    private boolean followPlayer = false;
-
     float timer = -1f;
     float timerCheckPosition = TIMER_VALUE_CHECK_POSITION;
 
@@ -35,7 +33,38 @@ public class EnemyController {
         if (enemy.playerInRange) {
             switch (movementMode) {
                 case FOLLOW_PLAYER:
+                    if (enemy.playerPos.x > enemy.position.x) {
+                        enemy.moveRight();
+                        dirX = 1;
+                    } else {
+                        enemy.moveLeft();
+                        dirX = -1;
+                    }
+
+                    if (enemy.playerPos.y > enemy.position.y) {
+                        enemy.moveUp();
+                        dirY = 1;
+                    } else {
+                        enemy.moveDown();
+                        dirY = -1;
+                    }
+                    return;
                 case ESCAPE_FROM_PLAYER:
+                    if (enemy.playerPos.x > enemy.position.x) {
+                        enemy.moveLeft();
+                        dirX = -1;
+                    } else {
+                        enemy.moveRight();
+                        dirX = 1;
+                    }
+
+                    if (enemy.playerPos.y > enemy.position.y) {
+                        enemy.moveDown();
+                        dirY = -1;
+                    } else {
+                        enemy.moveUp();
+                        dirY = 1;
+                    }
                     return;
                 default:
                     break;
