@@ -1,11 +1,11 @@
-package com.smokecastles.ld32.framework;
+package com.smokecastles.ld32.utils;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
-import com.smokecastles.ld32.Player;
+import com.smokecastles.ld32.entities.Player;
 import com.smokecastles.ld32.World;
 
 /**

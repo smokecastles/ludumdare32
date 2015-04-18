@@ -1,8 +1,8 @@
-package com.smokecastles.ld32;
+package com.smokecastles.ld32.entities;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.smokecastles.ld32.framework.Assets;
-import com.smokecastles.ld32.framework.DynamicGameEntity;
+import com.smokecastles.ld32.utils.Assets;
+import com.smokecastles.ld32.utils.DynamicGameEntity;
 
 /**
  * Created by juanma on 18/04/15.
@@ -76,7 +76,7 @@ public interface PlayerState {
         @Override
         public void update(Player player, float deltaTime) {
             if (player.weaponArea.radius > 0.1f) {
-                player.weaponArea.radius -= 0.7 * stateTime;
+                player.weaponArea.radius -= 0.9 * stateTime;
             } else {
                 player.weaponArea.radius = 0;
             }

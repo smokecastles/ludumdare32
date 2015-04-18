@@ -2,6 +2,7 @@ package com.smokecastles.ld32;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.smokecastles.ld32.entities.Player;
 
 /**
  * Created by juanma on 18/04/15.

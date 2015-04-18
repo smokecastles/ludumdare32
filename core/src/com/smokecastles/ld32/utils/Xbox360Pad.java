@@ -1,4 +1,4 @@
-package com.smokecastles.ld32.framework;
+package com.smokecastles.ld32.utils;
 
 import com.badlogic.gdx.controllers.PovDirection;
 

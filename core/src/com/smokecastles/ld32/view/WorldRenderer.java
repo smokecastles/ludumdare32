@@ -1,4 +1,4 @@
-package com.smokecastles.ld32;
+package com.smokecastles.ld32.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -9,6 +9,9 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.smokecastles.ld32.utils.Constants;
+import com.smokecastles.ld32.entities.Player;
+import com.smokecastles.ld32.World;
 
 /**
  * Created by juanma on 18/04/15.

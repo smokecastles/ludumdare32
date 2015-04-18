@@ -1,12 +1,12 @@
-package com.smokecastles.ld32.framework;
+package com.smokecastles.ld32.utils;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
-import com.smokecastles.ld32.DebugRenderer;
-import com.smokecastles.ld32.Player;
+import com.smokecastles.ld32.view.DebugRenderer;
+import com.smokecastles.ld32.entities.Player;
 
 import java.util.ArrayList;
 import java.util.List;

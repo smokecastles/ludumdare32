@@ -3,6 +3,9 @@ package com.smokecastles.ld32;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.smokecastles.ld32.utils.Constants;
+import com.smokecastles.ld32.view.WorldRenderer;
 
 /**
  * Created by juanma on 18/04/15.
@@ -19,10 +22,10 @@ public class GameScreen implements Screen {
     World world;
     WorldRenderer worldRenderer;
 
-    public GameScreen(LD32Game game) {
+    public GameScreen(LD32Game game, SpriteBatch batch) {
         this.game = game;
         world = new World();
-        worldRenderer = new WorldRenderer(game.batch, world);
+        worldRenderer = new WorldRenderer(batch, world);
 
     }
 
@@ -62,7 +65,7 @@ public class GameScreen implements Screen {
 
     }
 
-    public void update (float deltaTime) {
+    public void update(float deltaTime) {
         if (deltaTime > 0.1f) deltaTime = 0.1f;
 
         switch (state) {

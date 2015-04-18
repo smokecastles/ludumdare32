@@ -2,7 +2,7 @@ package com.smokecastles.ld32.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.smokecastles.ld32.Constants;
+import com.smokecastles.ld32.utils.Constants;
 import com.smokecastles.ld32.LD32Game;
 
 public class DesktopLauncher {

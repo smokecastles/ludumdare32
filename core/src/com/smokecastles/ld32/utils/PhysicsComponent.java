@@ -1,4 +1,4 @@
-package com.smokecastles.ld32.framework;
+package com.smokecastles.ld32.utils;
 
 import com.smokecastles.ld32.World;
 

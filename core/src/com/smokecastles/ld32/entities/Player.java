@@ -1,9 +1,10 @@
-package com.smokecastles.ld32;
+package com.smokecastles.ld32.entities;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Circle;
-import com.smokecastles.ld32.framework.Assets;
-import com.smokecastles.ld32.framework.DynamicGameEntity;
+import com.smokecastles.ld32.controller.PlayerController;
+import com.smokecastles.ld32.utils.Assets;
+import com.smokecastles.ld32.utils.DynamicGameEntity;
 
 /**
  * Created by juanma on 18/04/15.
@@ -24,7 +25,7 @@ public class Player extends DynamicGameEntity {
 
     PlayerState state; // current state
 
-    Circle weaponArea = new Circle();
+    public Circle weaponArea = new Circle();
 
     public Player(float x, float y) {
         super(x, y, WIDTH, HEIGHT, new PlayerPhysics());

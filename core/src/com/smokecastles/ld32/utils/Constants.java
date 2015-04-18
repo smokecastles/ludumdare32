@@ -1,4 +1,4 @@
-package com.smokecastles.ld32;
+package com.smokecastles.ld32.utils;
 
 /**
  * Created by juanma on 18/04/15.

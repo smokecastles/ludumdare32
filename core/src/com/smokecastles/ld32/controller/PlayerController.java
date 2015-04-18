@@ -1,6 +1,7 @@
-package com.smokecastles.ld32;
+package com.smokecastles.ld32.controller;
 
-import com.smokecastles.ld32.framework.PlayerInputHandler;
+import com.smokecastles.ld32.utils.PlayerInputHandler;
+import com.smokecastles.ld32.entities.Player;
 
 import java.util.List;
 
