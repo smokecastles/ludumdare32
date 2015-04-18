@@ -13,7 +13,7 @@ public interface PlayerState {
     void moveRight(Player player);
     void moveUp(Player player);
     void moveDown(Player player);
-
+    void attack(Player player);
     void hitEnemy(Player player);
 
     void update(Player player, float deltaTime);
@@ -59,6 +59,12 @@ public interface PlayerState {
         }
 
         @Override
+        public void attack(Player player) {
+            player.state = player.attackingState;
+            player.state.enterState(player);
+        }
+
+        @Override
         public void hitEnemy(Player player) {
 //            dude.state = dude.jumpingState;
 //            dude.state.enterState(dude);
@@ -75,9 +81,59 @@ public interface PlayerState {
                 player.velocity.x = 0;
             }
 
-            if (player.velocity.x == 0) {
-//                stateTime = 0;
-//                dude.state = dude.standingState;
+            if (Math.abs(player.velocity.y) < 1) {
+                player.velocity.y = 0;
+            }
+        }
+
+        @Override
+        public TextureRegion getKeyFrame() {
+            return Assets.playerNormal;
+        }
+    }
+
+    class AttackingState extends BaseState {
+        float stateTime;
+
+        @Override
+        public void enterState(Player player) {}
+
+        @Override
+        public void moveLeft(Player player) {
+        }
+
+        @Override
+        public void moveRight(Player player) {
+        }
+
+        @Override
+        public void moveUp(Player player) {
+        }
+
+        @Override
+        public void moveDown(Player player) {
+        }
+
+        @Override
+        public void attack(Player player) {
+
+        }
+
+        @Override
+        public void hitEnemy(Player player) {
+        }
+
+        @Override
+        public void update(Player player, float deltaTime) {
+            player.velocity.x *= Player.WALK_DAMPING;
+            player.velocity.y *= Player.WALK_DAMPING;
+
+            if (Math.abs(player.velocity.x) < 1) {
+                player.velocity.x = 0;
+            }
+
+            if (Math.abs(player.velocity.y) < 1) {
+                player.velocity.y = 0;
             }
         }
 

@@ -11,10 +11,11 @@ public class Player extends DynamicGameEntity {
     public static final float WIDTH = 2f;
     public static final float HEIGHT = 2f;
 
-    public static final float WALK_ACCEL = 5f;
+    public static final float WALK_ACCEL = 10f;
     public static final float WALK_DAMPING = 0.89f;
 
-    public PlayerState.NormalState standingState = new PlayerState.NormalState();
+    public PlayerState.NormalState normalState = new PlayerState.NormalState();
+    public PlayerState.AttackingState attackingState = new PlayerState.AttackingState();
 
     PlayerController controller;
 
@@ -24,7 +25,7 @@ public class Player extends DynamicGameEntity {
         super(x, y, WIDTH, HEIGHT, new PlayerPhysics());
 
         controller = new PlayerController();
-        state = standingState;
+        state = normalState;
     }
 
     public void moveLeft() {
@@ -41,6 +42,15 @@ public class Player extends DynamicGameEntity {
 
     public void moveDown() {
         state.moveDown(this);
+    }
+
+    public void attack(boolean active) {
+        if (active) {
+            state.attack(this);
+        } else {
+            state = normalState;
+            state.enterState(this);
+        }
     }
 
     public void update(float deltaTime) {

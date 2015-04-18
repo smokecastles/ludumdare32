@@ -18,6 +18,8 @@ public class PlayerInputHandler {
     Controller controller;
     boolean hasControllers;
 
+    private boolean isSpaceDown = false;
+
     public interface Command {
         public abstract void execute(Player player);
     }
@@ -50,6 +52,20 @@ public class PlayerInputHandler {
         }
     };
 
+    private static Command attackCommand = new Command() {
+        @Override
+        public void execute(Player player) {
+            player.attack(true);
+        }
+    };
+
+    private static Command cancelAttackCommand = new Command() {
+        @Override
+        public void execute(Player player) {
+            player.attack(false);
+        }
+    };
+
     private static Command resetPosition    = new Command() {
         @Override
         public void execute(Player player) {
@@ -72,6 +88,8 @@ public class PlayerInputHandler {
         Command keyRight    = moveRightCommand;
         Command keyUp       = moveUpCommand;
         Command keyDown     = moveDownCommand;
+        Command keySpaceDown  = attackCommand;
+        Command keySpaceUp  = cancelAttackCommand;
 
         // TODO: distinguish platform
         Application.ApplicationType appType = Gdx.app.getType();
@@ -90,6 +108,16 @@ public class PlayerInputHandler {
 
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN) ) {
             commands.add(keyDown);
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.SPACE) ) {
+            isSpaceDown = true;
+            // Start attack
+            commands.add(keySpaceDown);
+        } else if (isSpaceDown) {
+            isSpaceDown = false;
+            // Stop attack
+            commands.add(keySpaceUp);
         }
 
         // XBOX 360 PAD
