@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="43" height="24" tilewidth="30" tileheight="30" nextobjectid="1">
+ <tileset firstgid="1" name="textures" tilewidth="30" tileheight="30" spacing="2" margin="1">
+  <image source="textures.png" width="512" height="128"/>
+ </tileset>
+ <layer name="solid_tiles" width="43" height="24">
+  <data encoding="base64" compression="zlib">
+   eJztzrEJAAAMhMDP/ktnCgvBA3tv24ky6JXRK6NXRq+MXhm9Mnpl9MroldErw/hq6QEpgACD
+  </data>
+ </layer>
+</map>
