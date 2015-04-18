@@ -69,8 +69,8 @@ public class PlayerInputHandler {
     private static Command resetPosition    = new Command() {
         @Override
         public void execute(Player player) {
-            //dude.position.x = 2;
-            //dude.position.y = 12;
+            player.position.x = 2;
+            player.position.y = 12;
         }
     };
 
