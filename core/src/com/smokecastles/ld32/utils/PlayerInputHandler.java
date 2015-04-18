@@ -11,9 +11,6 @@ import com.smokecastles.ld32.entities.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by juanma on 5/02/15.
- */
 public class PlayerInputHandler {
     Controller controller;
     boolean hasControllers;
@@ -21,7 +18,7 @@ public class PlayerInputHandler {
     private boolean isSpaceDown = false;
 
     public interface Command {
-        public abstract void execute(Player player);
+        void execute(Player player);
     }
 
     private static Command moveLeftCommand  = new Command() {

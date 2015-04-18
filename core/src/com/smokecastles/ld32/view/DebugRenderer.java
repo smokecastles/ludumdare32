@@ -7,9 +7,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.smokecastles.ld32.World;
 
-/**
- * Created by juanma on 10/02/15.
- */
 public class DebugRenderer {
     OrthographicCamera cam;
     SpriteBatch batch;
@@ -20,13 +17,13 @@ public class DebugRenderer {
 
     public static boolean DEBUG_ENABLED = false;
 
-    private boolean drawGrid = true;
-    private boolean drawRectangles = true;
+    private boolean drawGrid        = true;
+    private boolean drawRectangles  = true;
 
     public DebugRenderer(OrthographicCamera cam, SpriteBatch batch, World world) {
-        this.cam = cam;
-        this.batch = batch;
-        this.world = world;
+        this.cam    = cam;
+        this.batch  = batch;
+        this.world  = world;
 
         shapeRenderer = new ShapeRenderer();
 
@@ -89,11 +86,11 @@ public class DebugRenderer {
                 font.draw(batch, "" + i, i, cam.position.y - cam.viewportHeight / 2 + font.getLineHeight());
         }
 
-        if (drawRectangles) {
+//        if (drawRectangles) {
 //            font.draw(batch, "(" + String.format("%.3f", world.dude.bounds.x)  +
 //                            ", " + String.format("%.3f", world.dude.bounds.y) + ")",
 //                    world.dude.bounds.x, world.dude.bounds.y);
-        }
+//        }
 
 //        font.draw(batch, ""+ Gdx.graphics.getFramesPerSecond(),
 //                cam.position.x + cam.viewportWidth / 2 - 2 * font.getBounds("  ").width,

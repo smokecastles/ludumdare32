@@ -7,9 +7,6 @@ import com.badlogic.gdx.utils.Array;
 import com.smokecastles.ld32.entities.Enemy;
 import com.smokecastles.ld32.entities.Player;
 
-/**
- * Created by juanma on 18/04/15.
- */
 public class World {
     public static final float WORLD_WIDTH = 43;
     public static final float WORLD_HEIGHT = 24;

@@ -8,9 +8,6 @@ import com.badlogic.gdx.utils.Pool;
 import com.smokecastles.ld32.entities.Player;
 import com.smokecastles.ld32.World;
 
-/**
- * Created by juanma on 18/04/15.
- */
 public abstract class WorldPhysics {
 
     private static Pool<Rectangle> rectPool = new Pool<Rectangle>() {

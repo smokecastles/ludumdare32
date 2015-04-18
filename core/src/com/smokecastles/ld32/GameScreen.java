@@ -14,9 +14,6 @@ import com.smokecastles.ld32.utils.Assets;
 import com.smokecastles.ld32.utils.Constants;
 import com.smokecastles.ld32.view.WorldRenderer;
 
-/**
- * Created by juanma on 18/04/15.
- */
 public class GameScreen implements Screen {
     static final int GAME_RUNNING   = 0;
     static final int GAME_PAUSED    = 1;

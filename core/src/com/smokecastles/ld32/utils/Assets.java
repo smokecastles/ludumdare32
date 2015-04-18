@@ -4,9 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-/**
- * Created by juanma on 18/04/15.
- */
 public class Assets {
     public static TextureRegion playerNormal;
     public static TextureRegion player_life_unit;

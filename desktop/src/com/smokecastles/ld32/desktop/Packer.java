@@ -3,9 +3,6 @@ package com.smokecastles.ld32.desktop;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.tools.texturepacker.TexturePacker;
 
-/**
- * Created by juanma on 18/04/15.
- */
 public class Packer {
     private static final boolean DEBUG = false;
 

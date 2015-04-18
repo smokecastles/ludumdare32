@@ -14,9 +14,6 @@ import com.smokecastles.ld32.utils.Constants;
 import com.smokecastles.ld32.entities.Player;
 import com.smokecastles.ld32.World;
 
-/**
- * Created by juanma on 18/04/15.
- */
 public class WorldRenderer {
     static final float FRUSTUM_HEIGHT   = 24;
     static final float FRUSTUM_WIDTH    = 24 * (float) Constants.NATIVE_WIDTH / Constants.NATIVE_HEIGHT;
@@ -41,7 +38,7 @@ public class WorldRenderer {
 
         this.cam.position.set(World.WORLD_WIDTH / 2, World.WORLD_HEIGHT / 2, 0);
 
-        tiledRenderer = new OrthogonalTiledMapRenderer(world.tiledMap, 1f / world.TILED_TILE_WIDTH_PIXELS, batch);
+        tiledRenderer = new OrthogonalTiledMapRenderer(world.tiledMap, 1f / World.TILED_TILE_WIDTH_PIXELS, batch);
 
         debugRenderer = new DebugRenderer(cam, batch, world);
         shapeRenderer = new ShapeRenderer();
