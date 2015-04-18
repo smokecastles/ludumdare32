@@ -2,6 +2,7 @@ package com.smokecastles.ld32;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -41,7 +42,25 @@ public class WorldRenderer {
         cam.update();
         batch.setProjectionMatrix(cam.combined);
 
+        renderEntities();
+
         debugRenderer.render();
+    }
+
+    private void renderEntities() {
+        batch.enableBlending();
+        batch.begin();
+        renderPlayer();
+        batch.end();
+    }
+
+    private void renderPlayer() {
+       TextureRegion keyFrame = world.player.getKeyFrame();
+
+        float renderHeight = Player.HEIGHT;
+        float renderWidth = renderHeight * keyFrame.getRegionWidth() / keyFrame.getRegionHeight();
+
+        batch.draw(keyFrame, world.player.position.x + renderWidth / 2, world.player.position.y - renderHeight / 2, - renderWidth, renderHeight);
     }
 
     public void resize(int width, int height){
