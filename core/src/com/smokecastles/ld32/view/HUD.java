@@ -1,11 +1,12 @@
 package com.smokecastles.ld32.view;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.smokecastles.ld32.entities.Entity;
@@ -20,6 +21,10 @@ public class HUD extends Observer {
     private Stage stage;
     private SpriteBatch batch;
     private Table rootTable, table;
+
+    private Skin skin;
+    private Table getReadyTable;
+    private Label getReadyTitle;
 
     static Image[] array_full_life  = new Image[Player.INITIAL_HEALTH];
     static Image[] array_empty_life = new Image[Player.INITIAL_HEALTH];
@@ -38,7 +43,7 @@ public class HUD extends Observer {
         rootTable = new Table();
         rootTable.setFillParent(true);
         rootTable.pad(10);
-//        rootTable.setDebug(true);
+        rootTable.setDebug(true);
 
         table     = new Table();
         for (int i=0; i<Player.INITIAL_HEALTH; i++){
@@ -46,7 +51,19 @@ public class HUD extends Observer {
         }
         rootTable.add(table);
         rootTable.top().left();
-//        table.setDebug(true);
+        table.setDebug(true);
+
+
+        skin    = new Skin(Gdx.files.internal("menu_skin.json"), new TextureAtlas(Gdx.files.internal("textures.atlas")));
+
+        // GET READY
+        getReadyTitle = new Label("Get Ready!", skin);
+        getReadyTitle.setFontScale(2f);
+        getReadyTable = new Table();
+        getReadyTable.add(getReadyTitle);
+
+        rootTable.row();
+        rootTable.add(getReadyTable);
     }
 
     public void show() {
@@ -81,5 +98,9 @@ public class HUD extends Observer {
             default:
                 break;
         }
+    }
+
+    public void showGetReady(boolean show) {
+        getReadyTable.setVisible(show);
     }
 }

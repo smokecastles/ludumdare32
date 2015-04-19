@@ -11,10 +11,11 @@ import com.smokecastles.ld32.view.SoundBox;
 import com.smokecastles.ld32.view.WorldRenderer;
 
 public class GameScreen implements Screen {
-    static final int GAME_RUNNING   = 0;
-    static final int GAME_PAUSED    = 1;
-    static final int GAME_LEVEL_END = 2;
-    static final int GAME_OVER      = 3;
+    static final int GAME_GET_READY   = 0;
+    static final int GAME_RUNNING   = 1;
+    static final int GAME_PAUSED    = 2;
+    static final int GAME_LEVEL_END = 3;
+    static final int GAME_OVER      = 4;
 
     LD32Game game;
 
@@ -39,6 +40,8 @@ public class GameScreen implements Screen {
         world.player.addObserver(soundBox);
         world.addObserver(soundBox);
 
+        hud.showGetReady(true);
+        state = GAME_GET_READY;
     }
 
     @Override
@@ -83,6 +86,13 @@ public class GameScreen implements Screen {
         if (deltaTime > 0.1f) deltaTime = 0.1f;
 
         switch (state) {
+            case GAME_GET_READY:
+                if (Gdx.input.isKeyJustPressed(-1)) {
+                    state = GAME_RUNNING;
+                    hud.showGetReady(false);
+                }
+                break;
+
             case GAME_RUNNING:
                 updateRunning(deltaTime);
                 soundBox.play();

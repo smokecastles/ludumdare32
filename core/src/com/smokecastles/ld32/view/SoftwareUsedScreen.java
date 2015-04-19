@@ -38,7 +38,6 @@ public class SoftwareUsedScreen implements Screen {
         text1.setAlignment(Align.center);
     }
 
-
     @Override
     public void show() {
         backButton.addListener(
