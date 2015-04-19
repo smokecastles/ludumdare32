@@ -13,6 +13,7 @@ public class Enemy extends DynamicGameEntity {
     public static final float WALK_DAMPING = 0.89f;
 
     EnemyState.NormalState normalState = new EnemyState.NormalState();
+    EnemyState.JustHitState justHitState = new EnemyState.JustHitState();
 
     EnemyController controller;
 
@@ -21,9 +22,11 @@ public class Enemy extends DynamicGameEntity {
     public Circle detectionArea;
 
     public boolean isDisappearing;
-    public boolean isAlive;
+    public boolean isDead;
     public boolean playerInRange;
     public Vector2 playerPos;
+
+    public int health;
 
     private TextureRegion keyFrame;
 
@@ -31,8 +34,8 @@ public class Enemy extends DynamicGameEntity {
         super(x, y, type.width, type.height, new EnemyPhysics());
 
         accel = type.accel;
-
         detectionArea = new Circle(x, y, type.detectionAreaRadius);
+        health = type.health;
 
         controller = type.controller;
 
@@ -40,8 +43,6 @@ public class Enemy extends DynamicGameEntity {
 
         state = normalState;
         state.enterState(this);
-
-        isAlive = true;
     }
 
     public void moveLeft() {
@@ -82,9 +83,13 @@ public class Enemy extends DynamicGameEntity {
         playerInRange = false;
     }
 
+    public void takeDamage(int damage) {
+        state.takeDamage(this, damage);
+    }
+
     @Override
     public TextureRegion getKeyFrame() {
-        return Assets.enemyBig;
+        return state.getKeyFrame();
     }
 
     public static abstract class EnemyType {
@@ -92,6 +97,7 @@ public class Enemy extends DynamicGameEntity {
         float height;
         float detectionAreaRadius;
         float accel;
+        int health;
         EnemyController controller;
         TextureRegion keyFrame;
     }
@@ -102,6 +108,7 @@ public class Enemy extends DynamicGameEntity {
             height = 3f;
             detectionAreaRadius = 10f;
             accel = 4f;
+            health = 3;
             controller = new EnemyController(EnemyController.MovementMode.FOLLOW_PLAYER);
             keyFrame = Assets.enemyBig;
         }
@@ -113,6 +120,7 @@ public class Enemy extends DynamicGameEntity {
             height = 2f;
             detectionAreaRadius = 5f;
             accel = 6f;
+            health = 2;
             controller = new EnemyController(EnemyController.MovementMode.TOTALLY_RANDOM);
             keyFrame = Assets.enemyBig;
         }
@@ -124,6 +132,7 @@ public class Enemy extends DynamicGameEntity {
             height = 1f;
             detectionAreaRadius = 3f;
             accel = 12f;
+            health = 1;
             controller = new EnemyController(EnemyController.MovementMode.ESCAPE_FROM_PLAYER);
             keyFrame = Assets.enemyBig;
         }

@@ -12,6 +12,7 @@ public interface EnemyState {
     void moveRight(Enemy enemy);
     void moveUp(Enemy enemy);
     void moveDown(Enemy enemy);
+    void takeDamage(Enemy enemy, int damage);
 
     void update(Enemy enemy, float deltaTime);
 
@@ -51,6 +52,18 @@ public interface EnemyState {
             enemy.orientation = DynamicGameEntity.Orientation.DOWN;
             enemy.velocity.y = -1 * enemy.accel;
         }
+
+        @Override
+        public void takeDamage(Enemy enemy, int damage) {
+            enemy.health -= damage;
+            if (enemy.health > 0) {
+                enemy.state = enemy.justHitState;
+                enemy.state.enterState(enemy);
+            } else {
+                enemy.isDead = true;
+            }
+        }
+
         @Override
         public void update(Enemy enemy, float deltaTime) {
             // Apply damping to the velocity on the x-axis so we don't
@@ -71,7 +84,28 @@ public interface EnemyState {
 
         @Override
         public TextureRegion getKeyFrame() {
-            return Assets.playerNormal;
+            return Assets.enemyBig;
+        }
+    }
+
+    /* Like normal state but can't be hit again */
+    class JustHitState extends NormalState {
+        private static final float INVULNERABLE_TIME_AFTER_HIT = 1f;
+
+
+        @Override
+        public void update(Enemy enemy, float deltaTime) {
+            super.update(enemy, deltaTime);
+
+            if (stateTime > INVULNERABLE_TIME_AFTER_HIT) {
+                enemy.state = enemy.normalState;
+                enemy.state.enterState(enemy);
+            }
+        }
+
+        @Override
+        public TextureRegion getKeyFrame() {
+            return Assets.enemyBigHit;
         }
     }
 }

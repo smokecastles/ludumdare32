@@ -6,17 +6,21 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Assets {
     public static TextureRegion playerNormal;
+    public static TextureRegion playerHit;
     public static TextureRegion player_life_unit;
     public static TextureRegion player_life_unit2;
     public static TextureRegion enemyBig;
+    public static TextureRegion enemyBigHit;
 
     public static void load() {
         TextureAtlas atlas  = new TextureAtlas(Gdx.files.internal("textures.atlas"));
 
         playerNormal        = new TextureRegion(atlas.findRegion("char2_blue"));
+        playerHit           = new TextureRegion(atlas.findRegion("char2_red"));
         player_life_unit    = new TextureRegion(atlas.findRegion("foe1_red"));
-        player_life_unit2    = new TextureRegion(atlas.findRegion("foe1_blue"));
+        player_life_unit2   = new TextureRegion(atlas.findRegion("foe1_blue"));
 
         enemyBig    = new TextureRegion(atlas.findRegion("foe2_blue"));
+        enemyBigHit    = new TextureRegion(atlas.findRegion("foe2_red"));
     }
 }

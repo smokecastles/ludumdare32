@@ -3,7 +3,6 @@ package com.smokecastles.ld32.entities;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Circle;
 import com.smokecastles.ld32.controller.PlayerController;
-import com.smokecastles.ld32.utils.Assets;
 
 /**
  * Created by juanma on 18/04/15.
@@ -21,6 +20,7 @@ public class Player extends DynamicGameEntity {
 
     PlayerState.NormalState normalState = new PlayerState.NormalState();
     PlayerState.AttackingState attackingState = new PlayerState.AttackingState();
+    PlayerState.JustHitState justHitState = new PlayerState.JustHitState();
 
     PlayerController controller;
 
@@ -29,6 +29,8 @@ public class Player extends DynamicGameEntity {
     public Circle weaponArea = new Circle();
 
     int health;
+
+    boolean finishedCharging;
 
     public Player(float x, float y) {
         super(x, y, WIDTH, HEIGHT, new PlayerPhysics());
@@ -39,6 +41,8 @@ public class Player extends DynamicGameEntity {
 
         state = normalState;
         state.enterState(this);
+
+        finishedCharging = false;
     }
 
     public void moveLeft() {
@@ -63,7 +67,14 @@ public class Player extends DynamicGameEntity {
         } else {
             state = normalState;
             state.enterState(this);
+
+            // To be read by World
+            finishedCharging = true;
         }
+    }
+
+    public void hitByEnemy() {
+        state.hitByEnemy(this);
     }
 
     public void update(float deltaTime) {
@@ -81,6 +92,6 @@ public class Player extends DynamicGameEntity {
 
     @Override
     public TextureRegion getKeyFrame() {
-        return Assets.playerNormal;
+        return state.getKeyFrame();
     }
 }

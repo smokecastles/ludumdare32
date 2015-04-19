@@ -13,7 +13,7 @@ public interface PlayerState {
     void moveUp(Player player);
     void moveDown(Player player);
     void attack(Player player);
-    void hitEnemy(Player player);
+    void hitByEnemy(Player player);
 
     void update(Player player, float deltaTime);
 
@@ -34,18 +34,12 @@ public interface PlayerState {
         public void moveLeft(Player player) {
             player.orientation = DynamicGameEntity.Orientation.LEFT;
             player.velocity.x = -1 * player.WALK_ACCEL;
-//            dude.state = dude.walkingState;
-//            dude.orientation = -1;
-//            dude.state.enterState(dude);
         }
 
         @Override
         public void moveRight(Player player) {
             player.orientation = DynamicGameEntity.Orientation.RIGHT;
             player.velocity.x = 1 * player.WALK_ACCEL;
-//            dude.state = dude.walkingState;
-//            dude.orientation = 1;
-//            dude.state.enterState(dude);
         }
 
         @Override
@@ -67,9 +61,10 @@ public interface PlayerState {
         }
 
         @Override
-        public void hitEnemy(Player player) {
-//            dude.state = dude.jumpingState;
-//            dude.state.enterState(dude);
+        public void hitByEnemy(Player player) {
+            player.health--;
+            player.state = player.justHitState;
+            player.state.enterState(player);
         }
 
         @Override
@@ -81,7 +76,7 @@ public interface PlayerState {
             }
 
             // Apply damping to the velocity on the x-axis so we don't
-            // walk infinitely once a key was pressed
+            // walk infinitely once a key is pressed
             player.velocity.x *= Player.WALK_DAMPING;
             player.velocity.y *= Player.WALK_DAMPING;
 
@@ -99,6 +94,31 @@ public interface PlayerState {
         @Override
         public TextureRegion getKeyFrame() {
             return Assets.playerNormal;
+        }
+    }
+
+    /* Like normal state but can't be hit again */
+    class JustHitState extends NormalState {
+        private static final float INVULNERABLE_TIME_AFTER_HIT = 1f;
+
+        @Override
+        public void hitByEnemy(Player player) {
+            // No damage
+        }
+
+        @Override
+        public void update(Player player, float deltaTime) {
+            super.update(player, deltaTime);
+
+            if (stateTime > INVULNERABLE_TIME_AFTER_HIT) {
+                player.state = player.normalState;
+                player.state.enterState(player);
+            }
+        }
+
+        @Override
+        public TextureRegion getKeyFrame() {
+            return Assets.playerHit;
         }
     }
 
@@ -132,7 +152,7 @@ public interface PlayerState {
         }
 
         @Override
-        public void hitEnemy(Player player) {
+        public void hitByEnemy(Player player) {
         }
 
         @Override

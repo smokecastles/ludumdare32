@@ -84,8 +84,6 @@ public class WorldRenderer {
 
     private void renderEnemies() {
         for (Enemy enemy : world.enemies) {
-            if (!enemy.isAlive) continue;
-
             TextureRegion keyFrame = enemy.getKeyFrame();
 
             float renderHeight = enemy.bounds.height;

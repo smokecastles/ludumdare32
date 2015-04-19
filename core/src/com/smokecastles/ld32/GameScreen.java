@@ -126,7 +126,17 @@ public class GameScreen implements Screen {
     }
 
     private void updateRunning(float deltaTime) {
-        world.update(deltaTime);
+        switch (world.state) {
+            case World.WORLD_STATE_RUNNING:
+                world.update(deltaTime);
+                break;
+            case World.WORLD_STATE_NEXT_LEVEL:
+                //world.update(deltaTime);
+                break;
+            case World.WORLD_STATE_GAME_OVER:
+                //world.update(deltaTime);
+                break;
+        }
     }
 
     public void draw() {
