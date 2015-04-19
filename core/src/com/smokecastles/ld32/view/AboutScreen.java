@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.smokecastles.ld32.GameScreen;
 import com.smokecastles.ld32.LD32Game;
 import com.smokecastles.ld32.utils.Constants;
@@ -18,65 +19,64 @@ import com.smokecastles.ld32.utils.Constants;
 /**
  * Created by juanma on 19/04/15.
  */
-public class MainMenu implements Screen {
+public class AboutScreen implements Screen {
     LD32Game game;
     private Stage stage;
     private Skin skin;
+    private Table tableInside;
     private Table table;
-    private Label title;
-    private Label footer;
-    private TextButton playButton, aboutButton, exitButton;
+    private Label aboutTitle;
+    private Label text1;
+    private Label text2;
+    private TextButton backButton;
+    private TextButton softwareButton;
 
-    public MainMenu(LD32Game game) {
+    public AboutScreen(LD32Game game) {
         this.game = game;
         stage   = new Stage();
         table   = new Table();
+        tableInside = new Table();
         skin    = new Skin(Gdx.files.internal("menu_skin.json"), new TextureAtlas(Gdx.files.internal("textures.atlas")));
-        playButton      = new TextButton("Play",skin);
-        aboutButton      = new TextButton("About",skin);
-        exitButton      = new TextButton("Exit", skin);
-        title           = new Label("SquadaBOOM", skin);
-        title.setFontScale(4f);
-        footer           = new Label("2015 Smoke Castles", skin);
-    }
+        backButton = new TextButton("Back",skin);
+        softwareButton = new TextButton("Software",skin);
+        aboutTitle = new Label("About", skin);
+        aboutTitle.setFontScale(2f);
+        text1 = new Label("Oh, thanks for your interest, take this extra life!\n" +
+                "Just kidding... we didn't have time to implement it!\n", skin);
+        text1.setAlignment(Align.center);
 
+        text2 = new Label("Our first game, made for Ludum Dare 32 by:\n\nJuanma Reyes\nPablo Diaz", skin);
+        text2.setAlignment(Align.center);
+    }
 
     @Override
     public void show() {
-        playButton.addListener(
+        backButton.addListener(
                 new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        game.setScreen(new GameScreen(game));
+                        game.setScreen(new MainMenu(game));
                     }
                 }
         );
 
-        aboutButton.addListener(
+        softwareButton.addListener(
                 new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        game.setScreen(new AboutScreen(game));
+                        game.setScreen(new SoftwareUsedScreen(game));
                     }
                 }
         );
-
-        exitButton.addListener(
-                new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        Gdx.app.exit();
-                    }
-                }
-        );
-
 
         // elements are displayed in order
-        table.add(title).padBottom(80).row();
-        table.add(playButton).size(150, 60).padBottom(20).row();
-        table.add(aboutButton).size(150, 60).padBottom(20).row();
-        table.add(exitButton).size(150, 60).padBottom(20).row();
-        table.add(footer).padTop(80).row();
+        table.add(aboutTitle).padTop(80).row();
+        table.add(text1).padTop(20).padBottom(20).row();
+
+        table.add(text2).padBottom(80).row();
+        tableInside.add(backButton).size(180, 60).padBottom(80).padRight(20);
+        tableInside.add(softwareButton).size(180, 60).padBottom(80).padLeft(20);
+        table.add(tableInside).row();
 
         table.setFillParent(true); // table as big as the stage and centered inside stage
         stage.addActor(table);
