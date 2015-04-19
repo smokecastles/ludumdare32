@@ -164,7 +164,7 @@ public interface PlayerState {
             if (damageTimer > Player.WEAPON_TIME_BETWEEN_SELF_DAMAGE) {
                 player.health--;
                 damageTimer = 0;
-                player.notifyObservers(new Event(Event.Type.HIT_BY_ENEMY));
+                player.notifyObservers(new Event(Event.Type.LIFE_DRAINING));
             }
 
             player.velocity.x *= Player.WALK_DAMPING;

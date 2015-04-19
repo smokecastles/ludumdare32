@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.smokecastles.ld32.entities.World;
 import com.smokecastles.ld32.utils.Constants;
 import com.smokecastles.ld32.view.HUD;
+import com.smokecastles.ld32.view.SoundBox;
 import com.smokecastles.ld32.view.WorldRenderer;
 
 public class GameScreen implements Screen {
@@ -23,15 +24,21 @@ public class GameScreen implements Screen {
 
     private SpriteBatch batch;
     private HUD hud;
+    private SoundBox soundBox;
 
     public GameScreen(LD32Game game_) {
         game            = game_;
         batch           = game.batch;
         world           = new World();
         worldRenderer   = new WorldRenderer(batch, world);
-        hud             = new HUD(batch);
 
+        hud             = new HUD(batch);
         world.player.addObserver(hud);
+
+        soundBox        = new SoundBox();
+        world.player.addObserver(soundBox);
+        world.addObserver(soundBox);
+
     }
 
     @Override
@@ -44,7 +51,6 @@ public class GameScreen implements Screen {
         update(delta);
         draw();
         hud.render(delta);
-
     }
 
     @Override
@@ -70,6 +76,7 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         hud.dispose();
+        soundBox.dispose();
     }
 
     public void update(float deltaTime) {
@@ -78,12 +85,19 @@ public class GameScreen implements Screen {
         switch (state) {
             case GAME_RUNNING:
                 updateRunning(deltaTime);
+                soundBox.play();
                 break;
+
             case GAME_PAUSED:
+                soundBox.pause();
                 break;
+
             case GAME_LEVEL_END:
+                soundBox.stop();
                 break;
+
             case GAME_OVER:
+                soundBox.stop();
                 break;
         }
     }
@@ -93,11 +107,13 @@ public class GameScreen implements Screen {
             case World.WORLD_STATE_RUNNING:
                 world.update(deltaTime);
                 break;
+
             case World.WORLD_STATE_NEXT_LEVEL:
-                //world.update(deltaTime);
+                state = GAME_LEVEL_END;
                 break;
+
             case World.WORLD_STATE_GAME_OVER:
-                //world.update(deltaTime);
+                state = GAME_OVER;
                 break;
         }
     }

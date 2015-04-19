@@ -96,7 +96,6 @@ public class World extends Entity{
             if (enemy.bounds.overlaps(player.bounds)) {
                 player.hitByEnemy();
                 needsShaking = true;
-                // TODO: send notification
             }
 
             enemy.updatePhysics(this);
@@ -114,6 +113,7 @@ public class World extends Entity{
                 }
             }
             needsShaking = true;
+            notifyObservers(new Event(Event.Type.BOOM));
             player.finishedCharging = false;
         }
     }

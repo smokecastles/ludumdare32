@@ -21,8 +21,8 @@ public class HUD extends Observer {
     private SpriteBatch batch;
     private Table rootTable, table;
 
-    static Image[] array_full_life  = new Image[12];
-    static Image[] array_empty_life = new Image[12];
+    static Image[] array_full_life  = new Image[Player.INITIAL_HEALTH];
+    static Image[] array_empty_life = new Image[Player.INITIAL_HEALTH];
 
     public HUD(SpriteBatch batch_){
         batch               = batch_;
@@ -30,7 +30,7 @@ public class HUD extends Observer {
         Viewport viewport   = new FitViewport(Constants.NATIVE_WIDTH, Constants.NATIVE_HEIGHT, camera );
         stage               = new Stage( viewport, batch );
 
-        for(int i=0; i<12;i++){
+        for(int i=0; i<Player.INITIAL_HEALTH;i++){
             array_full_life[i]  = new Image(Assets.player_life_unit);
             array_empty_life[i] = new Image(Assets.player_life_unit2 );
         }
@@ -41,6 +41,9 @@ public class HUD extends Observer {
 //        rootTable.setDebug(true);
 
         table     = new Table();
+        for (int i=0; i<Player.INITIAL_HEALTH; i++){
+                table.add(array_full_life[i]).pad(10);
+        }
         rootTable.add(table);
         rootTable.top().left();
 //        table.setDebug(true);
@@ -64,8 +67,9 @@ public class HUD extends Observer {
         switch (event.type())
         {
             case HIT_BY_ENEMY:
+            case LIFE_DRAINING:
                 table.clearChildren();
-                for (int i=0; i< ((Player) entity).INITIAL_HEALTH ; i++){
+                for (int i=0; i<Player.INITIAL_HEALTH; i++){
                     if (i<((Player) entity).health()){
                         table.add(array_full_life[i]).pad(10);
                     } else {
@@ -73,6 +77,7 @@ public class HUD extends Observer {
                     }
                 }
                 break;
+
             default:
                 break;
         }

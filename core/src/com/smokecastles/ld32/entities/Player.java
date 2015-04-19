@@ -61,11 +61,15 @@ public class Player extends DynamicGameEntity {
 
     public void attack(boolean active) {
         if (active) {
-            if  (weaponArea.radius < 0.1f) state.attack(this);
+            if  (weaponArea.radius < 0.1f) {
+                state.attack(this);
+                notifyObservers(new Event(Event.Type.CHARGING));
+            }
+
         } else {
             state = normalState;
             state.enterState(this);
-
+            notifyObservers(new Event(Event.Type.CHARGING_STOPPED));
             // Don't attack if radius is not high enough
             if (weaponArea.radius > 1f) {
                 // To be read by World
