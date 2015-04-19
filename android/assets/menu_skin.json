@@ -1,0 +1,14 @@
+{
+	"com.badlogic.gdx.graphics.g2d.BitmapFont": {
+		"font": {"file": "ld32.fnt"}
+	},
+	"com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
+		"default": { 	"up": "foe2_blue", "down": "char2_blue",
+						"font": font, "pressedOffsetY": -4 }
+	},
+    "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
+        "default": { "font": font}
+    }
+}
+
+
