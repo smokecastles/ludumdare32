@@ -41,8 +41,8 @@ public class AboutScreen implements Screen {
         softwareButton = new TextButton("Software",skin);
         aboutTitle = new Label("About", skin);
         aboutTitle.setFontScale(2f);
-        text1 = new Label("Oh, thanks for your interest, take this extra life!\n" +
-                "Just kidding... we didn't have time to implement it!\n", skin);
+        text1 = new Label("Oh! You get an extra life for the interest!\n" +
+                "Just kidding... We didn't have time to implement it! :P\n", skin);
         text1.setAlignment(Align.center);
 
         text2 = new Label("Our first game, made for Ludum Dare 32 by:\n\nJuanma Reyes\nPablo Diaz", skin);

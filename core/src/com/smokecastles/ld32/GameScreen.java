@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.smokecastles.ld32.entities.World;
 import com.smokecastles.ld32.utils.Constants;
 import com.smokecastles.ld32.view.HUD;
+import com.smokecastles.ld32.view.MainMenu;
 import com.smokecastles.ld32.view.SoundBox;
 import com.smokecastles.ld32.view.WorldRenderer;
 
@@ -16,6 +17,9 @@ public class GameScreen implements Screen {
     static final int GAME_PAUSED    = 2;
     static final int GAME_LEVEL_END = 3;
     static final int GAME_OVER      = 4;
+    static final int GAME_FINISHED  = 5;
+
+    private static final int N_LEVELS = 4;
 
     LD32Game game;
 
@@ -27,13 +31,20 @@ public class GameScreen implements Screen {
     private HUD hud;
     private SoundBox soundBox;
 
-    public GameScreen(LD32Game game_) {
+    int currentLevel = 1;
+
+    public GameScreen(LD32Game game_, int level) {
         game            = game_;
         batch           = game.batch;
-        world           = new World();
-        worldRenderer   = new WorldRenderer(batch, world);
         hud             = new HUD(batch);
         soundBox        = new SoundBox();
+
+        initWorld(level);
+    }
+
+    public void initWorld(int level) {
+        world           = new World(level);
+        worldRenderer   = new WorldRenderer(batch, world);
 
         // adding observers to observable entities
         world.player.addObserver(hud);
@@ -64,12 +75,16 @@ public class GameScreen implements Screen {
 
     @Override
     public void pause() {
-        state = GAME_PAUSED;
+        if (state == GAME_RUNNING) {
+            state = GAME_PAUSED;
+        }
     }
 
     @Override
     public void resume() {
-        state = GAME_RUNNING;
+        if (state == GAME_PAUSED) {
+            state = GAME_RUNNING;
+        }
     }
 
     @Override
@@ -105,10 +120,25 @@ public class GameScreen implements Screen {
 
             case GAME_LEVEL_END:
                 soundBox.stop();
+                if (Gdx.input.isKeyJustPressed(-1)) {
+                    game.setScreen(new GameScreen(game, ++currentLevel));
+                }
                 break;
 
             case GAME_OVER:
                 soundBox.stop();
+
+                if (Gdx.input.isKeyJustPressed(-1)) {
+                    // Reload current level
+                    game.setScreen(new GameScreen(game, currentLevel));
+                }
+                break;
+
+            case GAME_FINISHED:
+                soundBox.stop();
+                if (Gdx.input.isKeyJustPressed(-1)) {
+                    game.setScreen(new MainMenu(game));
+                }
                 break;
         }
     }
@@ -120,7 +150,11 @@ public class GameScreen implements Screen {
                 break;
 
             case World.WORLD_STATE_NEXT_LEVEL:
-                state = GAME_LEVEL_END;
+                if (currentLevel == N_LEVELS) {
+                    state = GAME_FINISHED;
+                } else {
+                    state = GAME_LEVEL_END;
+                }
                 break;
 
             case World.WORLD_STATE_GAME_OVER:

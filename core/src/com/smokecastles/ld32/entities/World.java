@@ -3,6 +3,7 @@ package com.smokecastles.ld32.entities;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.smokecastles.ld32.utils.ScreenShaker;
 import com.smokecastles.ld32.utils.WorldPhysics;
@@ -34,23 +35,17 @@ public class World extends Entity{
     public ScreenShaker screenShaker;
     public boolean needsShaking;
 
-    public World() {
+    public World(int level) {
         player = new Player(3, 3);
 
         enemies = new Array<Enemy>();
-
-        Enemy enemy = new Enemy(6, 6, new Enemy.BigEnemy());
-        enemies.add(enemy);
-        Enemy enemy2 = new Enemy(12, 12, new Enemy.MedEnemy());
-        enemies.add(enemy2);
-        Enemy enemy3 = new Enemy(12, 12, new Enemy.SmallEnemy());
-        enemies.add(enemy3);
-
         initTiled();
 
-        state = WORLD_STATE_RUNNING;
-
         screenShaker = new ScreenShaker();
+
+        populateWorld(level);
+
+        state = WORLD_STATE_RUNNING;
     }
 
     private void initTiled() {
@@ -129,6 +124,59 @@ public class World extends Entity{
         if (enemies.size == 0) {
             state = WORLD_STATE_NEXT_LEVEL;
             notifyObservers(new Event(Event.Type.WIN));
+        }
+    }
+
+    private void populateWorld(int level) {
+        int nSmall = 0;
+        int nMed = 0;
+        int nBig = 0;
+
+        switch (level) {
+            case 1:
+                nSmall = 3;
+                nMed = 2;
+                nBig = 0;
+                break;
+            case 2:
+                nSmall = 3;
+                nMed = 2;
+                nBig = 1;
+                break;
+            case 3:
+                nSmall = 2;
+                nMed = 2;
+                nBig = 2;
+                break;
+            case 4:
+                nSmall = 0;
+                nMed = 2;
+                nBig = 3;
+                break;
+        }
+
+        float randomX;
+        float randomY;
+
+        for (int i = 0; i < nSmall; i++) {
+            randomX = MathUtils.random(1, WORLD_WIDTH - 1);
+            randomY = MathUtils.random(1, WORLD_HEIGHT - 1);
+            Enemy e = new Enemy(randomX, randomY, new Enemy.SmallEnemy());
+            enemies.add(e);
+        }
+
+        for (int i = 0; i < nMed; i++) {
+            randomX = MathUtils.random(1, WORLD_WIDTH - 1);
+            randomY = MathUtils.random(1, WORLD_HEIGHT - 1);
+            Enemy e = new Enemy(randomX, randomY, new Enemy.MedEnemy());
+            enemies.add(e);
+        }
+
+        for (int i = 0; i < nBig; i++) {
+            randomX = MathUtils.random(1, WORLD_WIDTH - 1);
+            randomY = MathUtils.random(1, WORLD_HEIGHT - 1);
+            Enemy e = new Enemy(randomX, randomY, new Enemy.BigEnemy());
+            enemies.add(e);
         }
     }
 }

@@ -58,7 +58,7 @@ public class HUD extends Observer {
         message.setFontScale(2f);
         rootTable.add(message).expand().row(); // add message, expand and go to next row
 
-        explanation = new Label("Press arrows to control and hold space to load gun!!", skin);
+        explanation = new Label("Press arrows to control and hold space to load the 'unconventional' weapon!!", skin);
         explanation.setFontScale(0.8f);
         rootTable.add(explanation);
     }
