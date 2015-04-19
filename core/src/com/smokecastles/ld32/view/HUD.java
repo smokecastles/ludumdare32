@@ -7,12 +7,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.smokecastles.ld32.entities.Entity;
-import com.smokecastles.ld32.entities.Event;
-import com.smokecastles.ld32.entities.Observer;
-import com.smokecastles.ld32.entities.Player;
+import com.smokecastles.ld32.entities.*;
 import com.smokecastles.ld32.utils.Assets;
 import com.smokecastles.ld32.utils.Constants;
 
@@ -23,16 +21,20 @@ public class HUD extends Observer {
     private Table rootTable, lifeTable;
 
     private Skin skin;
-    private Label message, explanation;
+    private Label message, submessage, explanation;
 
     static Image[] array_full_life  = new Image[Player.INITIAL_HEALTH];
     static Image[] array_empty_life = new Image[Player.INITIAL_HEALTH];
 
-    public HUD(SpriteBatch batch_){
+    private int currentLevel;
+
+    public HUD(SpriteBatch batch_, int level){
         batch               = batch_;
         Camera camera       = new OrthographicCamera();
         Viewport viewport   = new FitViewport(Constants.NATIVE_WIDTH, Constants.NATIVE_HEIGHT, camera );
         stage               = new Stage( viewport, batch );
+
+        currentLevel = level;
 
         for(int i=0; i<Player.INITIAL_HEALTH;i++){
             array_full_life[i]  = new Image(Assets.player_life_unit);
@@ -54,13 +56,18 @@ public class HUD extends Observer {
 
         // screen messages
         skin    = new Skin(Gdx.files.internal("menu_skin.json"), new TextureAtlas(Gdx.files.internal("textures.atlas")));
-        message = new Label("Get Ready!!", skin);
+        message = new Label("Level " + currentLevel, skin);
         message.setFontScale(2f);
-        rootTable.add(message).expand().row(); // add message, expand and go to next row
+        submessage = new Label("Get ready!", skin);
+        submessage.setAlignment(Align.center);
+        rootTable.add(message).expand().bottom().row(); // add message, expand and go to next row
+        rootTable.add(submessage).expand().top().row();
 
-        explanation = new Label("Press arrows to control and hold space to load the 'unconventional' weapon!!", skin);
+        explanation = new Label("Use arrows/WASD to control, hold space to load the 'unconventional' weapon!!", skin);
         explanation.setFontScale(0.8f);
         rootTable.add(explanation);
+
+        showMessage(false);
     }
 
     public void show() {
@@ -93,19 +100,31 @@ public class HUD extends Observer {
                 break;
 
             case WIN:
-                message.setText("You Win!!");
+                message.setText("You Win!");
                 message.setVisible(true);
                 break;
 
             case GAME_OVER:
-                message.setText("Game Over!!");
+                message.setText("Game Over!");
                 message.setVisible(true);
+                break;
+
+            case GAME_FINISHED:
+                message.setText("Congratulations!!");
+                message.setVisible(true);
+                submessage.setText("You finished the game, you rock!" +
+                        "\nThanks for playing :)" +
+                        "\n\n\nPress space to go back to main menu");
+                submessage.setVisible(true);
                 break;
         }
     }
 
     public void showMessage(boolean show) {
         message.setVisible(show);
-        explanation.setVisible(show);
+        submessage.setVisible(show);
+
+        // only show explanation in first screen
+        explanation.setVisible((currentLevel == 1) ? show : false);
     }
 }

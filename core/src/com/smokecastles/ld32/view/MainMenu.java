@@ -1,11 +1,13 @@
 package com.smokecastles.ld32.view;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -46,6 +48,7 @@ public class MainMenu implements Screen {
     public void show() {
         soundIntro.play(1.0f);
         soundIntro.loop();
+
         playButton.addListener(
                 new ClickListener() {
                     @Override
@@ -74,6 +77,19 @@ public class MainMenu implements Screen {
                     }
                 }
         );
+
+        stage.addListener(new InputListener() {
+            @Override
+            public boolean keyUp(InputEvent event, int keycode) {
+                if (keycode == Input.Keys.ENTER) {
+                    soundIntro.stop();
+                    game.setScreen(new GameScreen(game, 1));
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
 
         // elements are displayed in order
         table.add(title).padBottom(80).row();
@@ -113,7 +129,7 @@ public class MainMenu implements Screen {
 
     @Override
     public void hide() {
-
+        Gdx.input.setInputProcessor(null);
     }
 
     @Override

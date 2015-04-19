@@ -33,7 +33,7 @@ public class SoftwareUsedScreen implements Screen {
         aboutTitle = new Label("Software used", skin);
         aboutTitle.setFontScale(2f);
         text1 = new Label("This game was made possible by:\n\n* LibGDX game framework\n" +
-                "* LMMS for sounds/music and inkscape for graphics\n\n" +
+                "* LMMS for sounds/music and Inkscape for graphics\n\n" +
                 "You can find the source code in github.com/smokecastles", skin);
         text1.setAlignment(Align.center);
     }

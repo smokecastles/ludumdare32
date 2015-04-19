@@ -36,7 +36,7 @@ public class World extends Entity{
     public boolean needsShaking;
 
     public World(int level) {
-        player = new Player(3, 3);
+        player = new Player(WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
 
         enemies = new Array<Enemy>();
         initTiled();
@@ -155,26 +155,48 @@ public class World extends Entity{
                 break;
         }
 
+//        nSmall = 1;
+//        nMed = 0;
+//        nBig = 0;
+
         float randomX;
         float randomY;
 
+        // We want to avoid enemy spawning near player initial position
+        float gapStartX = WORLD_WIDTH / 2 - 2;
+        float gapEndX = WORLD_WIDTH / 2 + 2;
+        float gapStartY = WORLD_HEIGHT / 2 - 2;
+        float gapEndY = WORLD_HEIGHT / 2 + 2;
+
         for (int i = 0; i < nSmall; i++) {
-            randomX = MathUtils.random(1, WORLD_WIDTH - 1);
-            randomY = MathUtils.random(1, WORLD_HEIGHT - 1);
+            do {
+                randomX = MathUtils.random(1, WORLD_WIDTH - 1);
+                randomY = MathUtils.random(1, WORLD_HEIGHT - 1);
+            } while (randomX > gapStartX && randomX < gapEndX ||
+                    randomY > gapStartY && randomY < gapEndY);
+
             Enemy e = new Enemy(randomX, randomY, new Enemy.SmallEnemy());
             enemies.add(e);
         }
 
         for (int i = 0; i < nMed; i++) {
-            randomX = MathUtils.random(1, WORLD_WIDTH - 1);
-            randomY = MathUtils.random(1, WORLD_HEIGHT - 1);
+            do {
+                randomX = MathUtils.random(2, WORLD_WIDTH - 2);
+                randomY = MathUtils.random(2, WORLD_HEIGHT - 2);
+            } while (randomX > gapStartX && randomX < gapEndX ||
+                    randomY > gapStartY && randomY < gapEndY);
+
             Enemy e = new Enemy(randomX, randomY, new Enemy.MedEnemy());
             enemies.add(e);
         }
 
         for (int i = 0; i < nBig; i++) {
-            randomX = MathUtils.random(1, WORLD_WIDTH - 1);
-            randomY = MathUtils.random(1, WORLD_HEIGHT - 1);
+            do {
+                randomX = MathUtils.random(3, WORLD_WIDTH - 3);
+                randomY = MathUtils.random(3, WORLD_HEIGHT - 3);
+            } while (randomX > gapStartX && randomX < gapEndX ||
+                    randomY > gapStartY && randomY < gapEndY);
+
             Enemy e = new Enemy(randomX, randomY, new Enemy.BigEnemy());
             enemies.add(e);
         }

@@ -8,8 +8,10 @@ public class Event {
         LIFE_DRAINING,
         BOOM,
         HIT_BY_ENEMY,
+        LEVEL_CHANGED,
         WIN,
-        GAME_OVER
+        GAME_OVER,
+        GAME_FINISHED
     }
     private Type type;
 

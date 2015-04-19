@@ -5,13 +5,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
+import com.smokecastles.ld32.LD32Game;
 import com.smokecastles.ld32.view.DebugRenderer;
 import com.smokecastles.ld32.entities.Player;
+import com.smokecastles.ld32.view.MainMenu;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerInputHandler {
+    private static final boolean DEBUG_ACTIONS_ENABLED = false;
+
     Controller controller;
     boolean hasControllers;
 
@@ -88,22 +92,23 @@ public class PlayerInputHandler {
         Command keySpaceDown  = attackCommand;
         Command keySpaceUp  = cancelAttackCommand;
 
-        // TODO: distinguish platform
-        Application.ApplicationType appType = Gdx.app.getType();
-
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)
+                || Gdx.input.isKeyPressed(Input.Keys.A)) {
             commands.add(keyLeft);
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)
+                || Gdx.input.isKeyPressed(Input.Keys.D)) {
             commands.add(keyRight);
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.UP) ) {
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)
+                || Gdx.input.isKeyPressed(Input.Keys.W)) {
             commands.add(keyUp);
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN) ) {
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)
+                || Gdx.input.isKeyPressed(Input.Keys.S)) {
             commands.add(keyDown);
         }
 
@@ -144,15 +149,22 @@ public class PlayerInputHandler {
             }
         }
 
-        // DEBUG MODE
-        if (Gdx.input.isKeyJustPressed(Input.Keys.P) ) {
-            DebugRenderer.DEBUG_ENABLED = !DebugRenderer.DEBUG_ENABLED;
-            Gdx.app.log("InputHandler", "Toggle debug");
+        if (DEBUG_ACTIONS_ENABLED) {
+            // DEBUG MODE
+            if (Gdx.input.isKeyJustPressed(Input.Keys.P) ) {
+                DebugRenderer.DEBUG_ENABLED = !DebugRenderer.DEBUG_ENABLED;
+                Gdx.app.log("InputHandler", "Toggle debug");
+            }
+
+            // DEBUG ACTIONS
+            if (Gdx.input.isKeyJustPressed(Input.Keys.R) ) {
+                commands.add(resetPosition);
+            }
         }
 
-        // DEBUG ACTIONS
-        if (Gdx.input.isKeyJustPressed(Input.Keys.R) ) {
-            commands.add(resetPosition);
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE) ) {
+            LD32Game game = (LD32Game) Gdx.app.getApplicationListener();
+            game.setScreen(new MainMenu(game));
         }
 
         return commands;

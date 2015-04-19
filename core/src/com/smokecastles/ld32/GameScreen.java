@@ -1,9 +1,11 @@
 package com.smokecastles.ld32;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.smokecastles.ld32.entities.Event;
 import com.smokecastles.ld32.entities.World;
 import com.smokecastles.ld32.utils.Constants;
 import com.smokecastles.ld32.view.HUD;
@@ -36,10 +38,11 @@ public class GameScreen implements Screen {
     public GameScreen(LD32Game game_, int level) {
         game            = game_;
         batch           = game.batch;
-        hud             = new HUD(batch);
+        hud             = new HUD(batch, level);
         soundBox        = new SoundBox();
+        currentLevel    = level;
 
-        initWorld(level);
+        initWorld(currentLevel);
     }
 
     public void initWorld(int level) {
@@ -89,7 +92,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void hide() {
-
     }
 
     @Override
@@ -129,14 +131,15 @@ public class GameScreen implements Screen {
                 soundBox.stop();
 
                 if (Gdx.input.isKeyJustPressed(-1)) {
-                    // Reload current level
-                    game.setScreen(new GameScreen(game, currentLevel));
+                    // Go to main menu if gameover
+                    game.setScreen(new MainMenu(game));
                 }
                 break;
 
             case GAME_FINISHED:
                 soundBox.stop();
-                if (Gdx.input.isKeyJustPressed(-1)) {
+                hud.onNotify(null, new Event(Event.Type.GAME_FINISHED));
+                if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
                     game.setScreen(new MainMenu(game));
                 }
                 break;
