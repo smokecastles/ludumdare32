@@ -12,6 +12,7 @@ public class Player extends DynamicGameEntity {
     public static final float WALK_DAMPING = 0.89f;
 
     public static final float MAX_WEAPON_RADIUS = WIDTH * 3;
+    public static final float WEAPON_TIME_BETWEEN_SELF_DAMAGE = 1f;
 
     public static final int INITIAL_HEALTH = 12;
 
@@ -60,13 +61,16 @@ public class Player extends DynamicGameEntity {
 
     public void attack(boolean active) {
         if (active) {
-            state.attack(this);
+            if  (weaponArea.radius < 0.1f) state.attack(this);
         } else {
             state = normalState;
             state.enterState(this);
 
-            // To be read by World
-            finishedCharging = true;
+            // Don't attack if radius is not high enough
+            if (weaponArea.radius > 1f) {
+                // To be read by World
+                finishedCharging = true;
+            }
         }
     }
 

@@ -24,9 +24,9 @@ public class GameScreen implements Screen {
     private SpriteBatch batch;
     private HUD hud;
 
-    public GameScreen(LD32Game game_, SpriteBatch batch_) {
+    public GameScreen(LD32Game game_) {
         game            = game_;
-        batch           = batch_;
+        batch           = game.batch;
         world           = new World();
         worldRenderer   = new WorldRenderer(batch, world);
         hud             = new HUD(batch);

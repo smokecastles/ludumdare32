@@ -127,10 +127,12 @@ public interface PlayerState {
 
     class AttackingState extends BaseState {
         float stateTime;
+        float damageTimer;
 
         @Override
         public void enterState(Player player) {
             stateTime = 0;
+            damageTimer = 0;
         }
 
         @Override
@@ -159,6 +161,12 @@ public interface PlayerState {
                 player.weaponArea.radius += 0.1 * stateTime;
             }
 
+            if (damageTimer > Player.WEAPON_TIME_BETWEEN_SELF_DAMAGE) {
+                player.health--;
+                damageTimer = 0;
+                player.notifyObservers(new Event(Event.Type.HIT_BY_ENEMY));
+            }
+
             player.velocity.x *= Player.WALK_DAMPING;
             player.velocity.y *= Player.WALK_DAMPING;
 
@@ -171,6 +179,7 @@ public interface PlayerState {
             }
 
             stateTime += deltaTime;
+            damageTimer += deltaTime;
         }
 
         @Override
