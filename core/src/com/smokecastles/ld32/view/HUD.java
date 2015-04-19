@@ -20,11 +20,10 @@ public class HUD extends Observer {
 
     private Stage stage;
     private SpriteBatch batch;
-    private Table rootTable, table;
+    private Table rootTable, lifeTable;
 
     private Skin skin;
-    private Table getReadyTable;
-    private Label getReadyTitle, explanation;
+    private Label message, explanation;
 
     static Image[] array_full_life  = new Image[Player.INITIAL_HEALTH];
     static Image[] array_empty_life = new Image[Player.INITIAL_HEALTH];
@@ -41,38 +40,27 @@ public class HUD extends Observer {
         }
 
         rootTable = new Table();
-        rootTable.setDebug(true);
+//        rootTable.setDebug(true);
         rootTable.setFillParent(true);
-      //  rootTable.setWidth(Constants.NATIVE_WIDTH);
-      //  rootTable.setHeight(Constants.NATIVE_HEIGHT);
-        rootTable.pad(10);
-       // rootTable.top().left();
+        //rootTable.pad(10);
 
-        table = new Table();
-        table.setDebug(true);
+        lifeTable = new Table();
+        lifeTable.pad(10);
+//        lifeTable.setDebug(true);
         for (int i=0; i<Player.INITIAL_HEALTH; i++){
-                table.add(array_full_life[i]).pad(10);
+                lifeTable.add(array_full_life[i]).pad(10);
         }
-        rootTable.add(table).left().row();
-       // table.top().left();
+        rootTable.add(lifeTable).left().row(); // add life lifeTable to the left and go to next row
 
+        // screen messages
         skin    = new Skin(Gdx.files.internal("menu_skin.json"), new TextureAtlas(Gdx.files.internal("textures.atlas")));
+        message = new Label("Get Ready!!", skin);
+        message.setFontScale(2f);
+        rootTable.add(message).expand().row(); // add message, expand and go to next row
 
-
-        // GET READY
-        getReadyTitle = new Label("Get Ready!", skin);
-        getReadyTitle.setFontScale(2f);
-        getReadyTable = new Table();
-        getReadyTable.add(getReadyTitle);
-
-       // rootTable.row();
-        rootTable.add(getReadyTable).expand().row();
-
-//        explanation = new Label("Controls: Press arrow and space to load gun", skin);
-//        explanation.setFontScale(1f);
-//        //rootTable.row();
-//        rootTable.add(getReadyTable);
-
+        explanation = new Label("Press arrows to control and hold space to load gun!!", skin);
+        explanation.setFontScale(0.8f);
+        rootTable.add(explanation);
     }
 
     public void show() {
@@ -94,19 +82,30 @@ public class HUD extends Observer {
         {
             case HIT_BY_ENEMY:
             case LIFE_DRAINING:
-                table.clearChildren();
+                lifeTable.clearChildren();
                 for (int i=0; i<Player.INITIAL_HEALTH; i++){
                     if (i<((Player) entity).health()){
-                        table.add(array_full_life[i]).pad(10);
+                        lifeTable.add(array_full_life[i]).pad(10);
                     } else {
-                        table.add(array_empty_life[i]).pad(10);
+                        lifeTable.add(array_empty_life[i]).pad(10);
                     }
                 }
+                break;
+
+            case WIN:
+                message.setText("You Win!!");
+                message.setVisible(true);
+                break;
+
+            case GAME_OVER:
+                message.setText("Game Over!!");
+                message.setVisible(true);
                 break;
         }
     }
 
-    public void showGetReady(boolean show) {
-        getReadyTable.setVisible(show);
+    public void showMessage(boolean show) {
+        message.setVisible(show);
+        explanation.setVisible(show);
     }
 }

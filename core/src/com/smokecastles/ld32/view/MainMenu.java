@@ -42,7 +42,6 @@ public class MainMenu implements Screen {
         soundIntro  = Assets.heart;
     }
 
-
     @Override
     public void show() {
         soundIntro.play(1.0f);
@@ -75,7 +74,6 @@ public class MainMenu implements Screen {
                     }
                 }
         );
-
 
         // elements are displayed in order
         table.add(title).padBottom(80).row();

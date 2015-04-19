@@ -32,15 +32,16 @@ public class GameScreen implements Screen {
         batch           = game.batch;
         world           = new World();
         worldRenderer   = new WorldRenderer(batch, world);
-
         hud             = new HUD(batch);
-        world.player.addObserver(hud);
-
         soundBox        = new SoundBox();
+
+        // adding observers to observable entities
+        world.player.addObserver(hud);
         world.player.addObserver(soundBox);
+        world.addObserver(hud);
         world.addObserver(soundBox);
 
-        hud.showGetReady(true);
+        hud.showMessage(true);
         state = GAME_GET_READY;
     }
 
@@ -88,7 +89,7 @@ public class GameScreen implements Screen {
         switch (state) {
             case GAME_GET_READY:
                 if (Gdx.input.isKeyJustPressed(-1)) {
-                    hud.showGetReady(false);
+                    hud.showMessage(false);
                     state = GAME_RUNNING;
                 }
                 break;

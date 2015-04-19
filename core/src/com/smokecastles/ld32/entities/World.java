@@ -121,14 +121,14 @@ public class World extends Entity{
     private void checkGameOver() {
         if (player.health == 0) {
             state = WORLD_STATE_GAME_OVER;
-            System.out.println("GAME OVER!!");
+            notifyObservers(new Event(Event.Type.GAME_OVER));
         }
     }
 
     private void checkNextLevel() {
         if (enemies.size == 0) {
             state = WORLD_STATE_NEXT_LEVEL;
-            System.out.println("NEXT LEVEL!!");
+            notifyObservers(new Event(Event.Type.WIN));
         }
     }
 }
