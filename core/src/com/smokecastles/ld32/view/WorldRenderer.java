@@ -88,8 +88,8 @@ public class WorldRenderer {
 
             TextureRegion keyFrame = enemy.getKeyFrame();
 
-            float renderHeight = Enemy.HEIGHT;
-            float renderWidth = Enemy.WIDTH;
+            float renderHeight = enemy.bounds.height;
+            float renderWidth = enemy.bounds.width;
 
             batch.draw(keyFrame, enemy.position.x + renderWidth / 2, enemy.position.y - renderHeight / 2, -renderWidth, renderHeight);
         }

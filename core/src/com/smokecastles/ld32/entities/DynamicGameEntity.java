@@ -16,7 +16,7 @@ public abstract class DynamicGameEntity extends Entity{
     public final Rectangle bounds;
 
     public final Vector2 velocity;
-    public final Vector2 accel;
+    public float accel;
 
     public Orientation orientation;
     public boolean grounded = false;
@@ -26,7 +26,7 @@ public abstract class DynamicGameEntity extends Entity{
         this.position   = new Vector2(x, y);
         this.bounds     = new Rectangle(x - width / 2, y - height / 2, width, height);
         this.velocity   = new Vector2();
-        this.accel      = new Vector2();
+        this.accel      = 0f;
 
         this.physics    = physics;
     }

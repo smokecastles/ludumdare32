@@ -17,6 +17,8 @@ public class Player extends DynamicGameEntity {
 
     public static final float MAX_WEAPON_RADIUS = WIDTH * 3;
 
+    public static final int INITIAL_HEALTH = 12;
+
     PlayerState.NormalState normalState = new PlayerState.NormalState();
     PlayerState.AttackingState attackingState = new PlayerState.AttackingState();
 
@@ -26,10 +28,14 @@ public class Player extends DynamicGameEntity {
 
     public Circle weaponArea = new Circle();
 
+    int health;
+
     public Player(float x, float y) {
         super(x, y, WIDTH, HEIGHT, new PlayerPhysics());
 
         controller = new PlayerController();
+
+        health = INITIAL_HEALTH;
 
         state = normalState;
         state.enterState(this);

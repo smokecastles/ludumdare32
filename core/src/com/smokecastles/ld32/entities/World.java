@@ -26,10 +26,12 @@ public class World extends Entity{
     public World() {
         player = new Player(3, 3);
 
-        Enemy enemy = new Enemy(6,6);
+        Enemy enemy = new Enemy(6, 6, new Enemy.BigEnemy());
         enemies.add(enemy);
-        Enemy enemy2 = new Enemy(12,12);
+        Enemy enemy2 = new Enemy(12, 12, new Enemy.MedEnemy());
         enemies.add(enemy2);
+        Enemy enemy3 = new Enemy(12, 12, new Enemy.SmallEnemy());
+        enemies.add(enemy3);
 
         initTiled();
     }

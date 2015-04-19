@@ -10,13 +10,7 @@ import com.smokecastles.ld32.utils.Assets;
  * Created by juanma on 18/04/15.
  */
 public class Enemy extends DynamicGameEntity {
-    public static final float WIDTH = 3f;
-    public static final float HEIGHT = 3f;
-
-    public static final float WALK_ACCEL = 6f;
     public static final float WALK_DAMPING = 0.89f;
-
-    public static final float DETECTION_RADIUS = 6f;
 
     EnemyState.NormalState normalState = new EnemyState.NormalState();
 
@@ -31,11 +25,18 @@ public class Enemy extends DynamicGameEntity {
     public boolean playerInRange;
     public Vector2 playerPos;
 
-    public Enemy(float x, float y) {
-        super(x, y, WIDTH, HEIGHT, new EnemyPhysics());
+    private TextureRegion keyFrame;
 
-        controller = new EnemyController();
-        detectionArea = new Circle(x, y, DETECTION_RADIUS);
+    public Enemy(float x, float y, EnemyType type) {
+        super(x, y, type.width, type.height, new EnemyPhysics());
+
+        accel = type.accel;
+
+        detectionArea = new Circle(x, y, type.detectionAreaRadius);
+
+        controller = type.controller;
+
+        keyFrame = type.keyFrame;
 
         state = normalState;
         state.enterState(this);
@@ -84,5 +85,47 @@ public class Enemy extends DynamicGameEntity {
     @Override
     public TextureRegion getKeyFrame() {
         return Assets.enemyBig;
+    }
+
+    public static abstract class EnemyType {
+        float width;
+        float height;
+        float detectionAreaRadius;
+        float accel;
+        EnemyController controller;
+        TextureRegion keyFrame;
+    }
+
+    public static class BigEnemy extends EnemyType {
+        public BigEnemy() {
+            width = 3f;
+            height = 3f;
+            detectionAreaRadius = 10f;
+            accel = 4f;
+            controller = new EnemyController(EnemyController.MovementMode.FOLLOW_PLAYER);
+            keyFrame = Assets.enemyBig;
+        }
+    }
+
+    public static class MedEnemy extends EnemyType {
+        public MedEnemy() {
+            width = 2f;
+            height = 2f;
+            detectionAreaRadius = 5f;
+            accel = 6f;
+            controller = new EnemyController(EnemyController.MovementMode.TOTALLY_RANDOM);
+            keyFrame = Assets.enemyBig;
+        }
+    }
+
+    public static class SmallEnemy extends EnemyType {
+        public SmallEnemy() {
+            width = 1f;
+            height = 1f;
+            detectionAreaRadius = 3f;
+            accel = 12f;
+            controller = new EnemyController(EnemyController.MovementMode.ESCAPE_FROM_PLAYER);
+            keyFrame = Assets.enemyBig;
+        }
     }
 }

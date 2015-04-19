@@ -9,15 +9,13 @@ import com.smokecastles.ld32.entities.Enemy;
  * Created by juanma on 18/04/15.
  */
 public class EnemyController {
-    World world;
-
-    enum MovementMode {
+    public enum MovementMode {
         TOTALLY_RANDOM, FOLLOW_PLAYER, ESCAPE_FROM_PLAYER
     }
 
-    MovementMode movementMode = MovementMode.FOLLOW_PLAYER;
+    MovementMode movementMode;
 
-    private static final float TIMER_VALUE_CHECK_POSITION = 0.5f;
+    private static final float TIMER_VALUE_CHECK_POSITION = 0.3f;
 
     float timer = -1f;
     float timerCheckPosition = TIMER_VALUE_CHECK_POSITION;
@@ -26,6 +24,10 @@ public class EnemyController {
     int dirY = 0;
 
     Vector2 previousPosition = new Vector2(0, 0);
+
+    public EnemyController(MovementMode mode) {
+        movementMode = mode;
+    }
 
     public void update(Enemy enemy, float deltaTime) {
         if (enemy.playerInRange) {
@@ -69,6 +71,8 @@ public class EnemyController {
                         dirX = 0;
                     }
 
+                    posDif2 = enemy.playerPos.y - enemy.position.y;
+
                     if (posDif2 > 2.0f) {
                         enemy.moveDown();
                         dirY = -1;
@@ -78,7 +82,7 @@ public class EnemyController {
                     } else {
                         dirX = 0;
                     }
-                    
+
                     return;
                 default:
                     break;
@@ -116,10 +120,10 @@ public class EnemyController {
 
                 if (dirY > 0) {
                     enemy.moveUp();
-                    dirY = -1;
+                    dirY = 1;
                 } else {
                     enemy.moveDown();
-                    dirY = 1;
+                    dirY = -1;
                 }
 
                 didCorrectDirection = true;

@@ -31,25 +31,25 @@ public interface EnemyState {
         @Override
         public void moveLeft(Enemy enemy) {
             enemy.orientation = DynamicGameEntity.Orientation.LEFT;
-            enemy.velocity.x = -1 * enemy.WALK_ACCEL;
+            enemy.velocity.x = -1 * enemy.accel;
         }
 
         @Override
         public void moveRight(Enemy enemy) {
             enemy.orientation = DynamicGameEntity.Orientation.RIGHT;
-            enemy.velocity.x = 1 * enemy.WALK_ACCEL;
+            enemy.velocity.x = 1 * enemy.accel;
         }
 
         @Override
         public void moveUp(Enemy enemy) {
             enemy.orientation = DynamicGameEntity.Orientation.UP;
-            enemy.velocity.y = 1 * enemy.WALK_ACCEL;
+            enemy.velocity.y = 1 * enemy.accel;
         }
 
         @Override
         public void moveDown(Enemy enemy) {
             enemy.orientation = DynamicGameEntity.Orientation.DOWN;
-            enemy.velocity.y = -1 * enemy.WALK_ACCEL;
+            enemy.velocity.y = -1 * enemy.accel;
         }
         @Override
         public void update(Enemy enemy, float deltaTime) {
