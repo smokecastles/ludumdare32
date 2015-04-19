@@ -4,9 +4,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Circle;
 import com.smokecastles.ld32.controller.PlayerController;
 
-/**
- * Created by juanma on 18/04/15.
- */
 public class Player extends DynamicGameEntity {
     public static final float WIDTH = 2f;
     public static final float HEIGHT = 2f;
@@ -93,5 +90,9 @@ public class Player extends DynamicGameEntity {
     @Override
     public TextureRegion getKeyFrame() {
         return state.getKeyFrame();
+    }
+
+    public int health(){
+        return health;
     }
 }

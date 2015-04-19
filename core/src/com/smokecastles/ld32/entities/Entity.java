@@ -14,20 +14,20 @@ public class Entity {
         observers.add(observer);
     }
 
-    public void removeObserver(Observer observer){
-        observers.remove(observer);
-    }
+//    public void removeObserver(Observer observer){
+//        observers.remove(observer);
+//    }
 
-    protected void notifyObservers(Entity entity, Event event){
+    protected void notifyObservers(Event event){
         for (Observer observer : observers ){
-            observer.onNotify(entity, event);
+            observer.onNotify(this, event);
         }
     }
 
-    protected void notify(Observer observer, Entity entity, Event event){
-        if (observers.contains(observer)){
-            observer.onNotify(entity, event);
-        }
-    }
+//    protected void notify(Observer observer, Event event){
+//        if (observers.contains(observer)){
+//            observer.onNotify(this, event);
+//        }
+//    }
 
 }

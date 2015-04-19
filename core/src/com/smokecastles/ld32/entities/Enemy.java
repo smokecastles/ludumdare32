@@ -6,9 +6,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.smokecastles.ld32.controller.EnemyController;
 import com.smokecastles.ld32.utils.Assets;
 
-/**
- * Created by juanma on 18/04/15.
- */
 public class Enemy extends DynamicGameEntity {
     public static final float WALK_DAMPING = 0.89f;
 

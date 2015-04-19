@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.smokecastles.ld32.entities.Entity;
 import com.smokecastles.ld32.entities.Event;
 import com.smokecastles.ld32.entities.Observer;
+import com.smokecastles.ld32.entities.Player;
 import com.smokecastles.ld32.utils.Assets;
 import com.smokecastles.ld32.utils.Constants;
 
@@ -40,18 +41,9 @@ public class HUD extends Observer {
 //        rootTable.setDebug(true);
 
         table     = new Table();
-//        table.setDebug(true);
-
-
-        for (int i=0; i<6; i++){
-            table.add(array_full_life[i]).pad(10);
-        }
-        for (int i=0; i<6; i++){
-            table.add(array_empty_life[i]).pad(10);
-        }
-
         rootTable.add(table);
         rootTable.top().left();
+//        table.setDebug(true);
     }
 
     public void show() {
@@ -69,6 +61,20 @@ public class HUD extends Observer {
 
     @Override
     public void onNotify(Entity entity, Event event) {
-
+        switch (event.type())
+        {
+            case HIT_BY_ENEMY:
+                table.clearChildren();
+                for (int i=0; i< ((Player) entity).INITIAL_HEALTH ; i++){
+                    if (i<((Player) entity).health()){
+                        table.add(array_full_life[i]).pad(10);
+                    } else {
+                        table.add(array_empty_life[i]).pad(10);
+                    }
+                }
+                break;
+            default:
+                break;
+        }
     }
 }

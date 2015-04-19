@@ -3,9 +3,6 @@ package com.smokecastles.ld32.entities;
 import com.smokecastles.ld32.utils.PhysicsComponent;
 import com.smokecastles.ld32.utils.WorldPhysics;
 
-/**
- * Created by juanma on 18/04/15.
- */
 public class PlayerPhysics implements PhysicsComponent {
     @Override
     public void update(DynamicGameEntity entity, World world) {

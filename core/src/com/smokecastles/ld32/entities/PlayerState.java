@@ -3,9 +3,6 @@ package com.smokecastles.ld32.entities;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.smokecastles.ld32.utils.Assets;
 
-/**
- * Created by juanma on 18/04/15.
- */
 public interface PlayerState {
     void enterState(Player player);
     void moveLeft(Player player);
@@ -65,6 +62,7 @@ public interface PlayerState {
             player.health--;
             player.state = player.justHitState;
             player.state.enterState(player);
+            player.notifyObservers(new Event(Event.Type.HIT_BY_ENEMY));
         }
 
         @Override

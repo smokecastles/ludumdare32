@@ -2,10 +2,8 @@ package com.smokecastles.ld32.entities;
 
 public class Event {
 
-    private enum Type{
-        DECREASE_LIFE,
-        INCREASE_LIFE,
-        PLAY_SOUND,
+    public enum Type{
+        HIT_BY_ENEMY,
         WIN,
         GAME_OVER
     }
@@ -13,6 +11,10 @@ public class Event {
 
     public Event(Type type_){
         type = type_;
+    }
+
+    public Type type(){
+        return type;
     }
 
 }
