@@ -28,59 +28,60 @@ public class GameScreen implements Screen {
     WorldRenderer worldRenderer;
 
     // HUD
-    private Stage       hud;
+//    private Stage       hud;
     private SpriteBatch batch;
-    private Table       rootTable, table;
+//    private Table       rootTable, table;
+//
+//    static Image[] array_full_life  = new Image[12];
+//    static Image[] array_empty_life = new Image[12];
 
-    static Image[] array_full_life  = new Image[12];
-    static Image[] array_empty_life = new Image[12];
-
+    // TODO CREATE A HUD OBJECT AND CALL IT IN THE DIFFERENT METHODS
     public GameScreen(LD32Game game_, SpriteBatch batch_) {
         game            = game_;
         batch           = batch_;
         world           = new World();
         worldRenderer   = new WorldRenderer(batch, world);
 
-        Viewport viewport = new FitViewport(Constants.NATIVE_WIDTH, Constants.NATIVE_HEIGHT, new OrthographicCamera());
-        hud               = new Stage( viewport, batch );
-
-        for(int i=0; i<12;i++){
-            array_full_life[i]  = new Image(Assets.player_life_unit);
-            array_empty_life[i] = new Image(Assets.player_life_unit2 );
-        }
-
-        rootTable = new Table();
-        rootTable.setFillParent(true);
-        rootTable.pad(10);
-//        rootTable.setDebug(true);
-
-        table     = new Table();
-//        table.setDebug(true);
-
-
-        for (int i=0; i<6; i++){
-            table.add(array_full_life[i]).pad(10);
-        }
-        for (int i=0; i<6; i++){
-            table.add(array_empty_life[i]).pad(10);
-        }
-
-        rootTable.add(table);
-        rootTable.top().left();
+//        Viewport viewport = new FitViewport(Constants.NATIVE_WIDTH, Constants.NATIVE_HEIGHT, new OrthographicCamera());
+//        hud               = new Stage( viewport, batch );
+//
+//        for(int i=0; i<12;i++){
+//            array_full_life[i]  = new Image(Assets.player_life_unit);
+//            array_empty_life[i] = new Image(Assets.player_life_unit2 );
+//        }
+//
+//        rootTable = new Table();
+//        rootTable.setFillParent(true);
+//        rootTable.pad(10);
+////        rootTable.setDebug(true);
+//
+//        table     = new Table();
+////        table.setDebug(true);
+//
+//
+//        for (int i=0; i<6; i++){
+//            table.add(array_full_life[i]).pad(10);
+//        }
+//        for (int i=0; i<6; i++){
+//            table.add(array_empty_life[i]).pad(10);
+//        }
+//
+//        rootTable.add(table);
+//        rootTable.top().left();
     }
 
     @Override
     public void show() {
-        hud.addActor(rootTable);
+//        hud.addActor(rootTable);
     }
 
     @Override
     public void render(float delta) {
         update(delta);
         draw();
-        // HUD
-        hud.act(delta);
-        hud.draw();
+//        // HUD
+//        hud.act(delta);
+//        hud.draw();
     }
 
     @Override
@@ -105,7 +106,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-        hud.dispose();
+//        hud.dispose();
     }
 
     public void update(float deltaTime) {

@@ -8,7 +8,7 @@ import com.smokecastles.ld32.entities.Enemy;
 import com.smokecastles.ld32.entities.Player;
 import com.smokecastles.ld32.utils.WorldPhysics;
 
-public class World {
+public class World extends Entity{
     public static final float WORLD_WIDTH = 43;
     public static final float WORLD_HEIGHT = 24;
 

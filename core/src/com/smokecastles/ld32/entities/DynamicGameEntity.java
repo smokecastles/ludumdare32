@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.smokecastles.ld32.utils.PhysicsComponent;
 
-public abstract class DynamicGameEntity {
+public abstract class DynamicGameEntity extends Entity{
     public enum Orientation {
         LEFT, RIGHT, UP, DOWN
     }
