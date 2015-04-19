@@ -46,7 +46,7 @@ public class SoundBox extends Observer {
         switch (event.type())
         {
             case CHARGING:
-                charging.play(0.7f);
+                charging.play(0.2f);
                 break;
 
             case CHARGING_STOPPED:
@@ -54,7 +54,6 @@ public class SoundBox extends Observer {
                 break;
 
             case BOOM:
-                System.out.println("BOOM");
                 explosion.play(1.0f);
                 break;
 
@@ -68,9 +67,6 @@ public class SoundBox extends Observer {
 
             case GAME_OVER:
                 charging.stop();
-                break;
-
-            default:
                 break;
         }
     }

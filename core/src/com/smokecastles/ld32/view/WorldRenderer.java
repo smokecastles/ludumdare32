@@ -67,20 +67,20 @@ public class WorldRenderer {
     }
 
     private void renderEntities() {
+        // Render weapon circle!
+        Gdx.gl.glEnable(GL20.GL_BLEND);
+        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(0.455f, 0.792f, 0.455f, 0.4f);
+        shapeRenderer.circle(world.player.weaponArea.x, world.player.weaponArea.y, world.player.weaponArea.radius, 30);
+        shapeRenderer.end();
+        Gdx.gl.glDisable(GL20.GL_BLEND);
+
         batch.enableBlending();
         batch.begin();
         renderPlayer();
         renderEnemies();
         batch.end();
-
-        // Render weapon circle!
-        Gdx.gl.glEnable(GL20.GL_BLEND);
-        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(1, 0, 0, 0.3f);
-        shapeRenderer.circle(world.player.weaponArea.x, world.player.weaponArea.y, world.player.weaponArea.radius, 30);
-        shapeRenderer.end();
-        Gdx.gl.glDisable(GL20.GL_BLEND);
     }
 
     private void renderPlayer() {

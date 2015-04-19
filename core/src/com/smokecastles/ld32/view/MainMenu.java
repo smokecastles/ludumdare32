@@ -2,6 +2,7 @@ package com.smokecastles.ld32.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -13,11 +14,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.smokecastles.ld32.GameScreen;
 import com.smokecastles.ld32.LD32Game;
+import com.smokecastles.ld32.utils.Assets;
 import com.smokecastles.ld32.utils.Constants;
 
-/**
- * Created by juanma on 19/04/15.
- */
 public class MainMenu implements Screen {
     LD32Game game;
     private Stage stage;
@@ -27,26 +26,32 @@ public class MainMenu implements Screen {
     private Label footer;
     private TextButton playButton, aboutButton, exitButton;
 
+    private Sound soundIntro;
+
     public MainMenu(LD32Game game) {
-        this.game = game;
-        stage   = new Stage();
-        table   = new Table();
-        skin    = new Skin(Gdx.files.internal("menu_skin.json"), new TextureAtlas(Gdx.files.internal("textures.atlas")));
-        playButton      = new TextButton("Play",skin);
-        aboutButton      = new TextButton("About",skin);
-        exitButton      = new TextButton("Exit", skin);
-        title           = new Label("SquadaBOOM", skin);
+        this.game   = game;
+        stage       = new Stage();
+        table       = new Table();
+        skin        = new Skin(Gdx.files.internal("menu_skin.json"), new TextureAtlas(Gdx.files.internal("textures.atlas")));
+        playButton  = new TextButton("Play",skin);
+        aboutButton = new TextButton("About",skin);
+        exitButton  = new TextButton("Exit", skin);
+        title       = new Label("SquadaBOOM", skin);
         title.setFontScale(4f);
-        footer           = new Label("2015 Smoke Castles", skin);
+        footer      = new Label("2015 Smoke Castles", skin);
+        soundIntro  = Assets.heart;
     }
 
 
     @Override
     public void show() {
+        soundIntro.play(1.0f);
+        soundIntro.loop();
         playButton.addListener(
                 new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
+                        soundIntro.stop();
                         game.setScreen(new GameScreen(game));
                     }
                 }
@@ -116,5 +121,6 @@ public class MainMenu implements Screen {
     public void dispose() {
         stage.dispose();
         skin.dispose();
+        soundIntro.dispose();
     }
 }

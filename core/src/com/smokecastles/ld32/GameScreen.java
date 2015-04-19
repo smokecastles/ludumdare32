@@ -38,7 +38,6 @@ public class GameScreen implements Screen {
         soundBox        = new SoundBox();
         world.player.addObserver(soundBox);
         world.addObserver(soundBox);
-
     }
 
     @Override

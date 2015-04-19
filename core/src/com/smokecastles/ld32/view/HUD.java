@@ -77,9 +77,6 @@ public class HUD extends Observer {
                     }
                 }
                 break;
-
-            default:
-                break;
         }
     }
 }
