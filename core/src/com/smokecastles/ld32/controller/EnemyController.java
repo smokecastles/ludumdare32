@@ -33,38 +33,54 @@ public class EnemyController {
         if (enemy.playerInRange) {
             switch (movementMode) {
                 case FOLLOW_PLAYER:
-                    if (enemy.playerPos.x > enemy.position.x) {
+                    float posDif = enemy.playerPos.x - enemy.position.x;
+
+                    if (posDif > 2.0f) {
                         enemy.moveRight();
                         dirX = 1;
-                    } else {
+                    } else if (posDif < -2.0f) {
                         enemy.moveLeft();
                         dirX = -1;
+                    } else {
+                        dirX = 0;
                     }
 
-                    if (enemy.playerPos.y > enemy.position.y) {
+                    posDif = enemy.playerPos.y - enemy.position.y;
+
+                    if (posDif > 2.0f) {
                         enemy.moveUp();
                         dirY = 1;
-                    } else {
+                    } else if (posDif < -2.0f) {
                         enemy.moveDown();
                         dirY = -1;
+                    } else {
+                        dirY = 0;
                     }
+
                     return;
                 case ESCAPE_FROM_PLAYER:
-                    if (enemy.playerPos.x > enemy.position.x) {
+                    float posDif2 = enemy.playerPos.x - enemy.position.x;
+
+                    if (posDif2 > 2.0f) {
                         enemy.moveLeft();
                         dirX = -1;
-                    } else {
+                    } else if (posDif2 < -2.0f) {
                         enemy.moveRight();
                         dirX = 1;
+                    } else {
+                        dirX = 0;
                     }
 
-                    if (enemy.playerPos.y > enemy.position.y) {
+                    if (posDif2 > 2.0f) {
                         enemy.moveDown();
                         dirY = -1;
-                    } else {
+                    } else if (posDif2 < -2.0f) {
                         enemy.moveUp();
                         dirY = 1;
+                    } else {
+                        dirX = 0;
                     }
+                    
                     return;
                 default:
                     break;
