@@ -86,13 +86,6 @@ public class GameScreen implements Screen {
         if (deltaTime > 0.1f) deltaTime = 0.1f;
 
         switch (state) {
-            case GAME_GET_READY:
-                if (Gdx.input.isKeyJustPressed(-1)) {
-                    state = GAME_RUNNING;
-                    hud.showGetReady(false);
-                }
-                break;
-
             case GAME_RUNNING:
                 updateRunning(deltaTime);
                 soundBox.play();
