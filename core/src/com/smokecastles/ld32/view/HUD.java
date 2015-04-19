@@ -24,7 +24,7 @@ public class HUD extends Observer {
 
     private Skin skin;
     private Table getReadyTable;
-    private Label getReadyTitle;
+    private Label getReadyTitle, explanation;
 
     static Image[] array_full_life  = new Image[Player.INITIAL_HEALTH];
     static Image[] array_empty_life = new Image[Player.INITIAL_HEALTH];
@@ -41,20 +41,23 @@ public class HUD extends Observer {
         }
 
         rootTable = new Table();
-        rootTable.setFillParent(true);
-        rootTable.pad(10);
         rootTable.setDebug(true);
+        rootTable.setFillParent(true);
+      //  rootTable.setWidth(Constants.NATIVE_WIDTH);
+      //  rootTable.setHeight(Constants.NATIVE_HEIGHT);
+        rootTable.pad(10);
+       // rootTable.top().left();
 
-        table     = new Table();
+        table = new Table();
+        table.setDebug(true);
         for (int i=0; i<Player.INITIAL_HEALTH; i++){
                 table.add(array_full_life[i]).pad(10);
         }
-        rootTable.add(table);
-        rootTable.top().left();
-        table.setDebug(true);
-
+        rootTable.add(table).left().row();
+       // table.top().left();
 
         skin    = new Skin(Gdx.files.internal("menu_skin.json"), new TextureAtlas(Gdx.files.internal("textures.atlas")));
+
 
         // GET READY
         getReadyTitle = new Label("Get Ready!", skin);
@@ -62,8 +65,14 @@ public class HUD extends Observer {
         getReadyTable = new Table();
         getReadyTable.add(getReadyTitle);
 
-        rootTable.row();
-        rootTable.add(getReadyTable);
+       // rootTable.row();
+        rootTable.add(getReadyTable).expand().row();
+
+//        explanation = new Label("Controls: Press arrow and space to load gun", skin);
+//        explanation.setFontScale(1f);
+//        //rootTable.row();
+//        rootTable.add(getReadyTable);
+
     }
 
     public void show() {

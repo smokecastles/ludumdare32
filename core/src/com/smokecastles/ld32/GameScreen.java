@@ -88,7 +88,7 @@ public class GameScreen implements Screen {
         switch (state) {
             case GAME_GET_READY:
                 if (Gdx.input.isKeyJustPressed(-1)) {
-                    hud.showGetReady(true);
+                    hud.showGetReady(false);
                     state = GAME_RUNNING;
                 }
                 break;
