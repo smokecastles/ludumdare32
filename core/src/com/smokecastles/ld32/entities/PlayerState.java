@@ -106,6 +106,10 @@ public interface PlayerState {
         }
 
         @Override
+        public void attack(Player player) {
+        }
+
+        @Override
         public void update(Player player, float deltaTime) {
             super.update(player, deltaTime);
 
@@ -147,7 +151,6 @@ public interface PlayerState {
 
         @Override
         public void attack(Player player) {
-
         }
 
         @Override
