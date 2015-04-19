@@ -17,6 +17,14 @@ public interface PlayerState {
     TextureRegion getKeyFrame();
 
     abstract class BaseState implements PlayerState {
+
+        @Override
+        public void hitByEnemy(Player player) {
+            player.health--;
+            player.state = player.justHitState;
+            player.state.enterState(player);
+            player.notifyObservers(new Event(Event.Type.HIT_BY_ENEMY));
+        }
     }
 
     class NormalState extends BaseState {
@@ -57,13 +65,6 @@ public interface PlayerState {
             player.state.enterState(player);
         }
 
-        @Override
-        public void hitByEnemy(Player player) {
-            player.health--;
-            player.state = player.justHitState;
-            player.state.enterState(player);
-            player.notifyObservers(new Event(Event.Type.HIT_BY_ENEMY));
-        }
 
         @Override
         public void update(Player player, float deltaTime) {
@@ -147,10 +148,6 @@ public interface PlayerState {
         @Override
         public void attack(Player player) {
 
-        }
-
-        @Override
-        public void hitByEnemy(Player player) {
         }
 
         @Override

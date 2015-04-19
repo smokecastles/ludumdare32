@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.utils.Array;
+import com.smokecastles.ld32.utils.ScreenShaker;
 import com.smokecastles.ld32.utils.WorldPhysics;
 
 import java.util.Iterator;
@@ -30,6 +31,9 @@ public class World extends Entity{
     // Entities
     public Array<Enemy> enemies;
 
+    public ScreenShaker screenShaker;
+    public boolean needsShaking;
+
     public World() {
         player = new Player(3, 3);
 
@@ -45,6 +49,8 @@ public class World extends Entity{
         initTiled();
 
         state = WORLD_STATE_RUNNING;
+
+        screenShaker = new ScreenShaker();
     }
 
     private void initTiled() {
@@ -60,6 +66,8 @@ public class World extends Entity{
         updateEnemies(deltaTime);
 
         checkCollisions();
+
+        screenShaker.tick(deltaTime);
 
         checkGameOver();
         checkNextLevel();
@@ -87,6 +95,7 @@ public class World extends Entity{
 
             if (enemy.bounds.overlaps(player.bounds)) {
                 player.hitByEnemy();
+                needsShaking = true;
                 // TODO: send notification
             }
 
@@ -104,6 +113,7 @@ public class World extends Entity{
                     }
                 }
             }
+            needsShaking = true;
             player.finishedCharging = false;
         }
     }

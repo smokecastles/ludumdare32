@@ -42,6 +42,7 @@ public class WorldRenderer {
 
         debugRenderer = new DebugRenderer(cam, batch, world);
         shapeRenderer = new ShapeRenderer();
+
     }
 
     public void render() {
@@ -52,8 +53,17 @@ public class WorldRenderer {
         renderTiledMap();
 
         renderEntities();
+        
+        shakeIfNeeded();
 
         debugRenderer.render();
+    }
+
+    private void shakeIfNeeded() {
+        if (world.needsShaking) {
+            world.screenShaker.startShaking(0.3f, 0.2f, cam, cam.position);
+            world.needsShaking = false;
+        }
     }
 
     private void renderEntities() {
