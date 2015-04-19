@@ -1,4 +1,4 @@
-package com.smokecastles.ld32;
+package com.smokecastles.ld32.entities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;

@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.smokecastles.ld32.entities.Enemy;
 import com.smokecastles.ld32.utils.Constants;
 import com.smokecastles.ld32.entities.Player;
-import com.smokecastles.ld32.World;
+import com.smokecastles.ld32.entities.World;
 
 public class WorldRenderer {
     static final float FRUSTUM_HEIGHT   = 24;

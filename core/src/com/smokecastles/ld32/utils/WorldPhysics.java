@@ -7,8 +7,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
-import com.smokecastles.ld32.entities.Player;
-import com.smokecastles.ld32.World;
+import com.smokecastles.ld32.entities.DynamicGameEntity;
+import com.smokecastles.ld32.entities.World;
 
 public abstract class WorldPhysics {
 

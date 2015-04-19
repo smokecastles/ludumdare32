@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.smokecastles.ld32.World;
+import com.smokecastles.ld32.entities.World;
 import com.smokecastles.ld32.entities.Enemy;
 
 public class DebugRenderer {

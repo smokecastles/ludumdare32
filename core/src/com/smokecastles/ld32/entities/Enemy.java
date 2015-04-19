@@ -5,8 +5,6 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 import com.smokecastles.ld32.controller.EnemyController;
 import com.smokecastles.ld32.utils.Assets;
-import com.smokecastles.ld32.utils.DynamicGameEntity;
-import com.smokecastles.ld32.utils.PhysicsComponent;
 
 /**
  * Created by juanma on 18/04/15.

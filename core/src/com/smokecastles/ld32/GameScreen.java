@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.smokecastles.ld32.entities.World;
 import com.smokecastles.ld32.utils.Assets;
 import com.smokecastles.ld32.utils.Constants;
 import com.smokecastles.ld32.view.WorldRenderer;

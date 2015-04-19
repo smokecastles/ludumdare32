@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Circle;
 import com.smokecastles.ld32.controller.PlayerController;
 import com.smokecastles.ld32.utils.Assets;
-import com.smokecastles.ld32.utils.DynamicGameEntity;
 
 /**
  * Created by juanma on 18/04/15.

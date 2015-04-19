@@ -1,9 +1,9 @@
-package com.smokecastles.ld32.utils;
+package com.smokecastles.ld32.entities;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.smokecastles.ld32.World;
+import com.smokecastles.ld32.utils.PhysicsComponent;
 
 public abstract class DynamicGameEntity {
     public enum Orientation {
@@ -19,8 +19,8 @@ public abstract class DynamicGameEntity {
     public final Vector2 accel;
 
     public Orientation orientation;
-    boolean grounded = false;
-    boolean atEdge = false;
+    public boolean grounded = false;
+    public boolean atEdge = false;
 
     public DynamicGameEntity(float x, float y, float width, float height, PhysicsComponent physics) {
         this.position   = new Vector2(x, y);

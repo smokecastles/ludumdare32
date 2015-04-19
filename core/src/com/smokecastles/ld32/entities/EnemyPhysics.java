@@ -1,7 +1,5 @@
 package com.smokecastles.ld32.entities;
 
-import com.smokecastles.ld32.World;
-import com.smokecastles.ld32.utils.DynamicGameEntity;
 import com.smokecastles.ld32.utils.PhysicsComponent;
 import com.smokecastles.ld32.utils.WorldPhysics;
 

@@ -2,7 +2,6 @@ package com.smokecastles.ld32.entities;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.smokecastles.ld32.utils.Assets;
-import com.smokecastles.ld32.utils.DynamicGameEntity;
 
 /**
  * Created by juanma on 18/04/15.

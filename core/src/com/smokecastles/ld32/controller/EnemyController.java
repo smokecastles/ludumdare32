@@ -1,11 +1,9 @@
 package com.smokecastles.ld32.controller;
 
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.smokecastles.ld32.World;
+import com.smokecastles.ld32.entities.World;
 import com.smokecastles.ld32.entities.Enemy;
-import com.smokecastles.ld32.entities.Player;
 
 /**
  * Created by juanma on 18/04/15.
