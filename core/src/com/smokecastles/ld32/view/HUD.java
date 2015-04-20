@@ -37,8 +37,8 @@ public class HUD extends Observer {
         currentLevel = level;
 
         for(int i=0; i<Player.INITIAL_HEALTH;i++){
-            array_full_life[i]  = new Image(Assets.player_life_unit);
-            array_empty_life[i] = new Image(Assets.player_life_unit2 );
+            array_full_life[i]  = new Image(Assets.full_life_unit);
+            array_empty_life[i] = new Image(Assets.empty_life_unit);
         }
 
         rootTable = new Table();

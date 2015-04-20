@@ -184,7 +184,7 @@ public interface PlayerState {
 
         @Override
         public TextureRegion getKeyFrame() {
-            return Assets.playerNormal;
+            return Assets.playerCharging;
         }
     }
 }

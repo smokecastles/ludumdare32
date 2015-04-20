@@ -9,8 +9,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Assets {
     public static TextureRegion playerNormal;
     public static TextureRegion playerHit;
-    public static TextureRegion player_life_unit;
-    public static TextureRegion player_life_unit2;
+    public static TextureRegion playerCharging;
+    public static TextureRegion full_life_unit;
+    public static TextureRegion empty_life_unit;
     public static TextureRegion enemyBig;
     public static TextureRegion enemyBigHit;
 
@@ -22,12 +23,13 @@ public class Assets {
 
         playerNormal        = new TextureRegion(atlas.findRegion("char2_blue"));
         playerHit           = new TextureRegion(atlas.findRegion("char2_red"));
-        player_life_unit    = new TextureRegion(atlas.findRegion("foe1_red"));
-        player_life_unit2   = new TextureRegion(atlas.findRegion("foe1_blue"));
+        playerCharging      = new TextureRegion(atlas.findRegion("char2_gold"));
+        full_life_unit      = new TextureRegion(atlas.findRegion("full_life"));
+        empty_life_unit     = new TextureRegion(atlas.findRegion("empty_life"));
+        enemyBig            = new TextureRegion(atlas.findRegion("foe2_blue"));
+        enemyBigHit         = new TextureRegion(atlas.findRegion("foe2_red"));
 
-        enemyBig    = new TextureRegion(atlas.findRegion("foe2_blue"));
-        enemyBigHit = new TextureRegion(atlas.findRegion("foe2_red"));
-
+        // Audio
         levelSong   = Gdx.audio.newMusic(Gdx.files.internal("sfx/2nd.ogg"));
         explosion   = Gdx.audio.newSound(Gdx.files.internal("sfx/explosion.ogg"));
         heart       = Gdx.audio.newSound(Gdx.files.internal("sfx/heart.ogg"));

@@ -5,7 +5,7 @@
  </tileset>
  <layer name="solid_tiles" width="43" height="24">
   <data encoding="base64" compression="zlib">
-   eJztzrEJAAAMhMDP/ktnCgvBA3tv24ky6JXRK6NXRq+MXhm9Mnpl9MroldErw/hq6QEpgACD
+   eJztzrEJAAAMhMAn+w+dKSwED+y9bSfKoFdGr4xeGb0yemX0yuiV0SujV0avDOOrpQdC4AEF
   </data>
  </layer>
 </map>
