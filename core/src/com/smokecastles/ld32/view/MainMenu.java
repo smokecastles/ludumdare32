@@ -119,13 +119,11 @@ public class MainMenu implements Screen {
 
     @Override
     public void pause() {
-        System.out.println("pause");
         soundIntro.pause();
     }
 
     @Override
     public void resume() {
-        System.out.println("resume");
         soundIntro.play(1.0f);
         soundIntro.loop();
     }

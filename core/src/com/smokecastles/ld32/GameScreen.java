@@ -80,6 +80,7 @@ public class GameScreen implements Screen {
     public void pause() {
         if (state == GAME_RUNNING) {
             state = GAME_PAUSED;
+            soundBox.pause();
         }
     }
 
@@ -87,11 +88,13 @@ public class GameScreen implements Screen {
     public void resume() {
         if (state == GAME_PAUSED) {
             state = GAME_RUNNING;
+            soundBox.play();
         }
     }
 
     @Override
     public void hide() {
+        soundBox.stop();
     }
 
     @Override
@@ -107,17 +110,16 @@ public class GameScreen implements Screen {
             case GAME_GET_READY:
                 if (Gdx.input.isKeyJustPressed(-1)) {
                     hud.showMessage(false);
+                    soundBox.play();
                     state = GAME_RUNNING;
                 }
                 break;
 
             case GAME_RUNNING:
                 updateRunning(deltaTime);
-                soundBox.play();
                 break;
 
             case GAME_PAUSED:
-                soundBox.pause();
                 break;
 
             case GAME_LEVEL_END:
