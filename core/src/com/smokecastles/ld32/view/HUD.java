@@ -46,10 +46,11 @@ public class HUD extends Observer {
         rootTable.setFillParent(true);
 
         lifeTable = new Table();
-        lifeTable.pad(10);
+        lifeTable.padTop(10);
+        lifeTable.padLeft(12);
 //        lifeTable.setDebug(true);
         for (int i=0; i<Player.INITIAL_HEALTH; i++){
-                lifeTable.add(array_full_life[i]).pad(10);
+                lifeTable.add(array_full_life[i]).pad(5);
         }
         rootTable.add(lifeTable).left().row(); // add life lifeTable to the left and go to next row
 
@@ -91,9 +92,9 @@ public class HUD extends Observer {
                 lifeTable.clearChildren();
                 for (int i=0; i<Player.INITIAL_HEALTH; i++){
                     if (i<((Player) entity).health()){
-                        lifeTable.add(array_full_life[i]).pad(10);
+                        lifeTable.add(array_full_life[i]).pad(5);
                     } else {
-                        lifeTable.add(array_empty_life[i]).pad(10);
+                        lifeTable.add(array_empty_life[i]).pad(5);
                     }
                 }
                 break;

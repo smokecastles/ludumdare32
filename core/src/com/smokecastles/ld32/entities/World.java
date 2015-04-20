@@ -158,10 +158,6 @@ public class World extends Entity{
                 break;
         }
 
-//        nSmall = 1;
-//        nMed = 0;
-//        nBig = 0;
-
         float randomX;
         float randomY;
 

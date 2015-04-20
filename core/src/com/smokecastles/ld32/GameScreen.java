@@ -14,7 +14,7 @@ import com.smokecastles.ld32.view.SoundBox;
 import com.smokecastles.ld32.view.WorldRenderer;
 
 public class GameScreen implements Screen {
-    static final int GAME_GET_READY   = 0;
+    static final int GAME_GET_READY = 0;
     static final int GAME_RUNNING   = 1;
     static final int GAME_PAUSED    = 2;
     static final int GAME_LEVEL_END = 3;

@@ -21,7 +21,6 @@ public class SoundBox extends Observer {
         explosion   = Assets.explosion;
         collision   = Assets.punch;
         self_damage = Assets.heart;
-
     }
 
     public void play(){
@@ -39,7 +38,6 @@ public class SoundBox extends Observer {
     public void dispose(){
         music.dispose();
     }
-
 
     @Override
     public void onNotify(Entity entity, Event event) {
