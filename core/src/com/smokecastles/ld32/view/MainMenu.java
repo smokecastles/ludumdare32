@@ -80,7 +80,7 @@ public class MainMenu implements Screen {
 
         stage.addListener(new InputListener() {
             @Override
-            public boolean keyUp(InputEvent event, int keycode) {
+            public boolean keyDown(InputEvent event, int keycode) {
                 if (keycode == Input.Keys.ENTER) {
                     soundIntro.stop();
                     game.setScreen(new GameScreen(game, 1));

@@ -114,7 +114,7 @@ public class HUD extends Observer {
                 message.setVisible(true);
                 submessage.setText("You finished the game, you rock!" +
                         "\nThanks for playing :)" +
-                        "\n\n\nPress space to go back to main menu");
+                        "\n\n\nPress enter to go back to main menu");
                 submessage.setVisible(true);
                 break;
         }

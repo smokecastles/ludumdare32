@@ -141,7 +141,7 @@ public class GameScreen implements Screen {
             case GAME_FINISHED:
                 soundBox.stop();
                 hud.onNotify(null, new Event(Event.Type.GAME_FINISHED));
-                if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+                if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
                     game.setScreen(new MainMenu(game));
                 }
                 break;
