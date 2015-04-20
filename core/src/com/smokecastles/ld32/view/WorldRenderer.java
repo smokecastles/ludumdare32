@@ -61,7 +61,7 @@ public class WorldRenderer {
 
     private void shakeIfNeeded() {
         if (world.needsShaking) {
-            world.screenShaker.startShaking(0.3f, 0.2f, cam, cam.position);
+            world.screenShaker.startShaking(0.4f, 0.2f, cam, cam.position);
             world.needsShaking = false;
         }
     }
