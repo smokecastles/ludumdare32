@@ -34,6 +34,7 @@ public class World extends Entity{
 
     public ScreenShaker screenShaker;
     public boolean needsShaking;
+    private Event collision;
 
     public World(int level) {
         player = new Player(WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
@@ -46,6 +47,8 @@ public class World extends Entity{
         populateWorld(level);
 
         state = WORLD_STATE_RUNNING;
+
+        collision = new Event(Event.Type.BOOM);
     }
 
     private void initTiled() {
@@ -108,7 +111,7 @@ public class World extends Entity{
                 }
             }
             needsShaking = true;
-            notifyObservers(new Event(Event.Type.BOOM));
+            notifyObservers(collision);
             player.finishedCharging = false;
         }
     }
@@ -170,8 +173,8 @@ public class World extends Entity{
 
         for (int i = 0; i < nSmall; i++) {
             do {
-                randomX = MathUtils.random(1, WORLD_WIDTH - 1);
-                randomY = MathUtils.random(1, WORLD_HEIGHT - 1);
+                randomX = MathUtils.random(2, WORLD_WIDTH - 2);
+                randomY = MathUtils.random(2, WORLD_HEIGHT - 2);
             } while (randomX > gapStartX && randomX < gapEndX ||
                     randomY > gapStartY && randomY < gapEndY);
 
@@ -181,8 +184,8 @@ public class World extends Entity{
 
         for (int i = 0; i < nMed; i++) {
             do {
-                randomX = MathUtils.random(2, WORLD_WIDTH - 2);
-                randomY = MathUtils.random(2, WORLD_HEIGHT - 2);
+                randomX = MathUtils.random(3, WORLD_WIDTH - 3);
+                randomY = MathUtils.random(3, WORLD_HEIGHT - 3);
             } while (randomX > gapStartX && randomX < gapEndX ||
                     randomY > gapStartY && randomY < gapEndY);
 
@@ -192,8 +195,8 @@ public class World extends Entity{
 
         for (int i = 0; i < nBig; i++) {
             do {
-                randomX = MathUtils.random(3, WORLD_WIDTH - 3);
-                randomY = MathUtils.random(3, WORLD_HEIGHT - 3);
+                randomX = MathUtils.random(4, WORLD_WIDTH - 4);
+                randomY = MathUtils.random(4, WORLD_HEIGHT - 4);
             } while (randomX > gapStartX && randomX < gapEndX ||
                     randomY > gapStartY && randomY < gapEndY);
 

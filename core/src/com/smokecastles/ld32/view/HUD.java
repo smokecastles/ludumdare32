@@ -44,7 +44,6 @@ public class HUD extends Observer {
         rootTable = new Table();
 //        rootTable.setDebug(true);
         rootTable.setFillParent(true);
-        //rootTable.pad(10);
 
         lifeTable = new Table();
         lifeTable.pad(10);
