@@ -1,7 +1,7 @@
 SquadaBOOM (Ludum Dare 32)
 ==========================
 
-![Alt text](http://img.itch.io/aW1hZ2UvMjM4MjMvOTQ0NDgucG5n/original/XIaxvm.png)
+![Game screen](http://img.itch.io/aW1hZ2UvMjM4MjMvOTQ0NDgucG5n/original/XIaxvm.png)
 
 Our first game, made for Ludum Dare 32. Theme: "An unconventional weapon".
 
@@ -11,7 +11,7 @@ Using [LibGDX](http://libgdx.badlogicgames.com/) as game framework.
 
 (The MIT License)
 
-Copyright (c) 2015 Smoke Castlse
+Copyright (c) 2015 Smoke Castles
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
