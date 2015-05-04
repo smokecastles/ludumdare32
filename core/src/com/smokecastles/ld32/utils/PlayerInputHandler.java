@@ -1,10 +1,7 @@
 package com.smokecastles.ld32.utils;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.controllers.Controller;
-import com.badlogic.gdx.controllers.Controllers;
 import com.smokecastles.ld32.LD32Game;
 import com.smokecastles.ld32.view.DebugRenderer;
 import com.smokecastles.ld32.entities.Player;
@@ -15,9 +12,6 @@ import java.util.List;
 
 public class PlayerInputHandler {
     private static final boolean DEBUG_ACTIONS_ENABLED = false;
-
-    Controller controller;
-    boolean hasControllers;
 
     private boolean isSpaceDown = false;
 
@@ -75,13 +69,6 @@ public class PlayerInputHandler {
         }
     };
 
-    public PlayerInputHandler() {
-        if(Controllers.getControllers().size == 0)
-            hasControllers = false;
-        else
-            controller = Controllers.getControllers().first();
-    }
-
     public List<Command> getInput() {
         List<Command> commands = new ArrayList<Command>();
 
@@ -120,33 +107,6 @@ public class PlayerInputHandler {
             isSpaceDown = false;
             // Stop attack
             commands.add(keySpaceUp);
-        }
-
-        // XBOX 360 PAD
-        if (controller != null){
-            if(controller.getAxis(Xbox360Pad.AXIS_LEFT_Y) > 0.2f) {
-                commands.add(keyRight);
-            }
-
-            if (controller.getAxis(Xbox360Pad.AXIS_LEFT_Y) < -0.2f) {
-                commands.add(keyLeft);
-            }
-
-            if (controller.getAxis(Xbox360Pad.AXIS_LEFT_X) < -0.2f) {
-                commands.add(keyUp);
-            }
-
-            if (controller.getAxis(Xbox360Pad.AXIS_LEFT_X) > -0.2f) {
-                commands.add(keyDown);
-            }
-
-//            if (controller.getButton(Xbox360Pad.BUTTON_A)) {
-//                commands.add(keySpace);
-//            }
-
-            if (controller.getButton(Xbox360Pad.BUTTON_BACK)) {
-                commands.add(resetPosition);
-            }
         }
 
         if (DEBUG_ACTIONS_ENABLED) {
